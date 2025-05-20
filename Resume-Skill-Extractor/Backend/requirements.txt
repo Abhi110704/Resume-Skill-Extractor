@@ -1,6 +1,0 @@
-fastapi
-uvicorn
-python-multipart
-PyMuPDF
-requests
-pdfminer.six
