@@ -1,0 +1,155 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 47.4% 11.2%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 47.4% 11.2%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.skill-chip {
+  @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 inline-flex items-center px-3 py-1 rounded-full text-sm font-medium m-1 transition-colors;
+}
+
+.skill-chip.highlighted {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90;
+}
+
+.floating-icon {
+  @apply absolute text-muted-foreground/30 animate-float;
+}
+
+/* Category Headers */
+.skill-category-header {
+  @apply text-base font-semibold mb-3 border-b pb-1;
+}
+
+/* Programming Languages */
+.category-programming {
+  @apply text-blue-700;
+}
+
+/* Web Technologies */
+.category-web {
+  @apply text-purple-700;
+}
+
+/* Databases */
+.category-database {
+  @apply text-green-700;
+}
+
+/* Cloud & DevOps */
+.category-cloud {
+  @apply text-orange-700;
+}
+
+/* Data Science */
+.category-data-science {
+  @apply text-red-700;
+}
+
+/* Big Data */
+.category-big-data {
+  @apply text-yellow-700;
+}
+
+/* Tools */
+.category-tools {
+  @apply text-indigo-700;
+}
+
+/* Testing */
+.category-testing {
+  @apply text-pink-700;
+}
+
+/* Soft Skills */
+.category-soft {
+  @apply text-teal-700;
+}
+
+/* Other */
+.category-other {
+  @apply text-gray-700;
+}
+
+/* Skills container */
+.skills-container {
+  @apply bg-white rounded-lg p-5 shadow-md;
+}
+
+/* Skills grid layout */
+.skills-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4;
+}
