@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume Skill Extractor</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      body {
+        min-height: 100vh;
+        margin: 0;
+        font-family: 'Montserrat', 'Roboto', sans-serif;
+        background: var(--primary-bg);
+        color: var(--primary-text);
+        transition: background 0.3s, color 0.3s;
+      }
+      :root {
+        --primary-bg: #f4f4f4;
+        --primary-text: #222;
+        --secondary-bg: #fff;
+        --accent: #007bff;
+        --card-bg: #fff;
+        --secondary-text: #555;
+      }
+      [data-theme="dark"] {
+        --primary-bg: #181a1b;
+        --primary-text: #f4f4f4;
+        --secondary-bg: #23272a;
+        --accent: #00bfff;
+        --card-bg: #23272a;
+        --secondary-text: #bbb;
+      }
+      #root {
+        max-width: 1200px;
+        margin: 60px auto 0 auto;
+        padding: 2rem 1rem;
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+      }
+      .left-section,
+      .right-section {
+        flex: 1;
+        min-width: 300px;
+        background: rgba(255,255,255,0.18);
+        border-radius: 24px;
+        box-shadow: 0 8px 40px 0 rgba(0,0,0,0.18), 0 0 0 4px rgba(0,123,255,0.15);
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
+        border: 2px solid rgba(255,255,255,0.25);
+        padding: 2rem;
+      }
+      .left-section {
+        text-align: center;
+      }
+      .right-section {
+        text-align: center;
+      }
+      #extractorCard,
+      #historySection {
+        background: none;
+        box-shadow: none;
+        border: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      h2 {
+        margin-top: 0;
+        color: var(--accent);
+        font-family: 'Montserrat', 'Roboto', sans-serif;
+        font-size: 2.5rem;
+        letter-spacing: 1px;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+        max-width: 300px;
+        margin: 20px auto;
+      }
+      li {
+        margin: 1rem 0;
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s, text-shadow 0.2s;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      }
+      a:hover {
+        color: #ff9800;
+        text-shadow: 0 2px 8px #ff9800aa;
+      }
+      /* Floating Social Icons */
+      .floating-icons {
+        position: fixed;
+        top: 50%;
+        left: 24px;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        z-index: 1000;
+      }
+      .floating-icons a {
+        background: var(--card-bg);
+        color: var(--accent);
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        font-size: 1.4rem;
+        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        border: 2px solid rgba(0,123,255,0.15);
+      }
+      .floating-icons a:hover {
+        background: var(--accent);
+        color: #fff;
+        box-shadow: 0 0 16px #007bff88;
+      }
+      /* Theme Toggle */
+      .theme-toggle {
+        position: fixed;
+        top: 24px;
+        right: 32px;
+        background: var(--card-bg);
+        border: none;
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        font-size: 1.3rem;
+        color: var(--accent);
+        transition: background 0.2s, color 0.2s;
+        z-index: 1100;
+        border: 2px solid rgba(0,123,255,0.15);
+      }
+      .theme-toggle:hover {
+        background: var(--accent);
+        color: #fff;
+        box-shadow: 0 0 16px #007bff88;
+      }
+      /* Footer */
+      footer {
+        margin-top: 2.5rem;
+        text-align: center;
+        color: #888;
+        font-size: 1rem;
+        letter-spacing: 0.5px;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      }
+      /* Responsive */
+      @media (max-width: 700px) {
+        #root {
+          max-width: 98vw;
+          padding: 1.2rem 0.5rem 1rem 0.5rem;
+        }
+        .theme-toggle {
+          right: 12px;
+          top: 12px;
+        }
+      }
+      @media (max-width: 500px) {
+        .floating-icons {
+          flex-direction: row;
+          top: auto;
+          bottom: 16px;
+          left: 50%;
+          transform: translateX(-50%);
+          gap: 16px;
+        }
+        .theme-toggle {
+          top: 12px;
+          right: 6px;
+        }
+        #root {
+          margin-top: 80px;
+          padding: 1rem 0.5rem;
+        }
+        .floating-img:not(.corner-image) {
+          display: none;
+        }
+        .left-section, .right-section {
+          padding: 1.5rem 1rem;
+          min-width: unset;
+        }
+      }
+      #extractorCard {
+        max-width: 90%;
+        margin: 3.5rem auto 0 auto;
+        background: rgba(255,255,255,0.18);
+        border-radius: 36px;
+        box-shadow: 0 8px 40px 0 rgba(0,0,0,0.18), 0 0 0 6px rgba(0,123,255,0.18);
+        padding: 2rem 1rem;
+        border: 2px solid rgba(255,255,255,0.25);
+        backdrop-filter: blur(18px) saturate(180%);
+        -webkit-backdrop-filter: blur(18px) saturate(180%);
+        position: relative;
+        text-align: center;
+        color: var(--primary-text);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #extractorCard > *:not(.extractor-images) {
+        background: var(--card-bg);
+        border-radius: 8px;
+        width: 100%;
+        max-width: 400px;
+        margin: 0.5rem auto;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        padding: 0.8rem;
+        box-sizing: border-box;
+      }
+      .extractor-images {
+        margin-bottom: 2rem;
+      }
+      #extractorCard h3 {
+        margin-top: 0;
+        color: var(--accent);
+      }
+      #uploadBtn {
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        padding: 0.6rem 1.5rem;
+        font-size: 1rem;
+        font-family: inherit;
+        font-weight: 500;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        transition: background 0.2s, color 0.2s;
+        margin-bottom: 1rem;
+        box-shadow: 0 0 8px #007bff44;
+        border: 2px solid rgba(0,123,255,0.15);
+      }
+      #uploadBtn:hover {
+        background: #ff9800;
+        color: #fff;
+        box-shadow: 0 0 16px #ff980088;
+      }
+      #status {
+        color: var(--accent);
+        min-height: 24px;
+        font-size: 1rem;
+        margin: 1rem 0;
+      }
+      #skillsList {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        margin-top: 0.5rem;
+      }
+      .skill-chip {
+        padding: 6px 12px;
+        border: 1px solid #888;
+        border-radius: 20px;
+        background-color: #eee;
+        color: #222;
+        font-size: 0.98rem;
+        margin-bottom: 5px;
+        transition: background 0.2s, color 0.2s;
+      }
+      [data-theme="dark"] #extractorCard {
+        background: var(--card-bg);
+        color: var(--primary-text);
+      }
+      [data-theme="dark"] .skill-chip {
+        background-color: #23272a;
+        color: #f4f4f4;
+        border: 1px solid #555;
+      }
+      @media (max-width: 700px) {
+        #extractorCard {
+          max-width: 98vw;
+          padding: 1.2rem 0.5rem 1rem 0.5rem;
+          border-radius: 18px;
+        }
+        .extractor-illustration {
+          width: 80px;
+          height: 80px;
+        }
+      }
+      .extractor-illustration {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        margin-bottom: 1rem;
+        border-radius: 16px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        background: var(--secondary-bg);
+        margin-right: 10px;
+        margin-left: 10px;
+      }
+      .extractor-images {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+      .extractor-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 1.2rem;
+      }
+      .extractor-file-row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.7rem;
+        width: 100%;
+      }
+      #resumeFile {
+        margin: 0 auto 0.5rem auto;
+        display: block;
+      }
+      #uploadBtn {
+        margin: 0.5rem auto 1rem auto;
+        display: block;
+      }
+      /* Decorative corner images */
+      .corner-image {
+        position: fixed;
+        z-index: 900;
+        width: 60px;
+        height: 60px;
+        opacity: 0.7;
+        pointer-events: none;
+      }
+      .corner-image.topleft {
+        top: 12px;
+        left: 12px;
+      }
+      .corner-image.topright {
+        top: 12px;
+        right: 12px;
+      }
+      .corner-image.bottomleft {
+        bottom: 12px;
+        left: 12px;
+      }
+      .corner-image.bottomright {
+        bottom: 12px;
+        right: 12px;
+      }
+      @media (max-width: 700px) {
+        .corner-image {
+          width: 36px;
+          height: 36px;
+        }
+      }
+      /* Floating animated SVG shape */
+      .floating-svg {
+        position: fixed;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        z-index: 0;
+        opacity: 0.18;
+        pointer-events: none;
+        animation: floatShape 8s ease-in-out infinite alternate;
+      }
+      @keyframes floatShape {
+        0% { transform: translateX(-50%) translateY(0); }
+        100% { transform: translateX(-50%) translateY(40px); }
+      }
+      /* Floating decorative images */
+      .floating-img {
+        position: fixed;
+        z-index: 10;
+        width: 40px;
+        height: 40px;
+        opacity: 0.7;
+        pointer-events: none;
+        animation: floatY 5s ease-in-out infinite alternate;
+      }
+      .floating-img.right {
+        top: 20%;
+        right: 32px;
+        animation-delay: 0s;
+      }
+      .floating-img.left {
+        top: 60%;
+        left: 32px;
+        animation-delay: 2s;
+      }
+      .floating-img.bottom {
+        bottom: 32px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation-delay: 1s;
+      }
+      @keyframes floatY {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-60px); }
+      }
+      @media (max-width: 700px) {
+        .floating-img {
+          width: 40px;
+          height: 40px;
+        }
+        .floating-img.right, .floating-img.left {
+          right: 8px;
+          left: 8px;
+        }
+        .floating-img.bottom {
+          bottom: 8px;
+        }
+      }
+      .float-diag {
+        animation: floatDiag 7s ease-in-out infinite alternate;
+      }
+      .float-diag2 {
+        animation: floatDiag2 8s ease-in-out infinite alternate;
+      }
+      .float-left-right {
+        animation: floatLeftRight 6s ease-in-out infinite alternate;
+      }
+      .float-fast {
+        animation: floatY 3s ease-in-out infinite alternate;
+      }
+      .float-fast2 {
+        animation: floatY 2.5s ease-in-out infinite alternate;
+      }
+      @keyframes floatDiag {
+        0% { transform: translateY(0) translateX(0); }
+        100% { transform: translateY(-60px) translateX(50px); }
+      }
+      @keyframes floatDiag2 {
+        0% { transform: translateY(0) translateX(0); }
+        100% { transform: translateY(-50px) translateX(-50px); }
+      }
+      @keyframes floatLeftRight {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(60px); }
+      }
+      @keyframes floatBelowBox {
+        0% { transform: translateX(-50%) translateY(0); }
+        100% { transform: translateX(-50%) translateY(-40px); }
+      }
+      @keyframes floatYExtended {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-80px); }
+      }
+      @keyframes floatXExtended {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(80px); }
+      }
+      @keyframes floatDiagExtended {
+        0% { transform: translateY(0) translateX(0); }
+        100% { transform: translateY(-80px) translateX(80px); }
+      }
+      @keyframes floatDiagExtended2 {
+        0% { transform: translateY(0) translateX(0); }
+        100% { transform: translateY(-80px) translateX(-80px); }
+      }
+      /* Add styles for history section */
+      #historySection {
+        max-width: 90%;
+        margin: 2rem auto 0 auto;
+        background: var(--card-bg);
+        border-radius: 18px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        padding: 1.5rem;
+        color: var(--primary-text);
+        text-align: left;
+        display: none; /* Initially hide the history section */
+      }
+      #historySection h3 {
+        margin-top: 0;
+        color: var(--accent);
+      }
+      #historyList {
+        margin-top: 1rem;
+      }
+      .history-entry {
+        background: var(--secondary-bg);
+        border-radius: 8px;
+        padding: 0.8rem 1rem;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      }
+      .history-entry:hover {
+        background: var(--primary-bg);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      }
+      .history-entry-info {
+        flex-grow: 1;
+        margin-right: 1rem;
+      }
+      .history-entry-info p {
+        margin: 0; /* Remove vertical margin to minimize spacing */
+        font-size: 0.9rem;
+      }
+      .history-entry-actions {
+        display: flex;
+        align-items: center;
+      }
+      .history-entry-name {
+        font-weight: 600;
+        margin-bottom: 0.4rem;
+        font-size: 1rem;
+      }
+      .history-entry-name input[type="text"] {
+        font-size: 1rem;
+        padding: 4px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        width: 100%;
+      }
+      .history-entry-delete {
+        color: #ff4d4d;
+        cursor: pointer;
+        font-size: 1.1rem;
+        margin-left: 0.8rem;
+        transition: color 0.2s;
+      }
+      .history-entry-delete:hover {
+        color: #ff1a1a;
+      }
+      #skillSearch {
+        box-sizing: border-box;
+      }
+      .left-section.collapsed-left {
+        flex: unset;
+        width: 100%;
+        max-width: 100%;
+        height: 80px;
+        overflow: hidden;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .left-section.collapsed-left h2 {
+        margin: 0;
+      }
+      .left-section.collapsed-left > *:not(h2):not(#expandLeftSectionBtn) {
+        display: none;
+      }
+      .left-section.collapsed-left #expandLeftSectionBtn {
+        display: block;
+      }
+      .right-section.expanded-right {
+        flex: unset;
+        width: 100%;
+        max-width: 100%;
+        margin-top: 20px;
+      }
+      #extractorCard.extractor-split {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      .extractor-left-content {
+        flex: 1;
+        max-width: 400px;
+        padding-right: 1rem;
+      }
+      .extractor-right-content {
+        flex: 2;
+        min-width: 300px;
+      }
+      #extractorCard > *:not(.extractor-images) {
+        /* Remove styles that are now handled by extractor-left-content/right-content */
+        /* These styles were causing elements to overflow when not in a flex column */
+        /* background: var(--card-bg); */
+        /* border-radius: 8px; */
+        /* width: 100%; */
+        /* max-width: 400px; */
+        /* margin: 0.5rem auto; */
+        /* box-shadow: 0 2px 8px rgba(0,0,0,0.04); */
+        /* padding: 0.8rem; */
+        /* box-sizing: border-box; */
+      }
+      #skillSearch {
+        box-sizing: border-box;
+        width: 100%;
+      }
+    </style>
+    <style>
+      /* Neon Glow Text */
+      .neon-text {
+        color: #fff;
+        text-shadow:
+          0 0 7px #fff,
+          0 0 10px #fff,
+          0 0 21px #fff,
+          0 0 42px #00bfff,
+          0 0 82px #00bfff,
+          0 0 92px #00bfff,
+          0 0 102px #00bfff,
+          0 0 151px #00bfff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Floating Social Icons -->
+    <div class="floating-icons">
+      <!-- GitHub icons are now handled by the React app -->
+    </div>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+      <i class="fas fa-moon"></i>
+    </button>
+    <div id="root">
+      <div class="left-section">
+        <h2>Resume Skill Extractor</h2>
+        <div style="display: flex; justify-content: center; gap: 24px; margin: 18px 0 10px 0;">
+          <a href="https://github.com/abhishek-si-ngh" target="_blank" style="color: #111; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+            <i class="fab fa-github"></i> Abhishek Singh
+          </a>
+          <a href="https://github.com/Abhi110704" target="_blank" style="color: #111; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+            <i class="fab fa-github"></i> Abhiyanshu Anand
+          </a>
+          <a href="https://github.com/Sanskar2301" target="_blank" style="color: #111; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+            <i class="fab fa-github"></i> Sanskar Singh
+          </a>
+        </div>
+
+        <!-- Spacing after GitHub links -->
+        <div style="margin-bottom: 30px;"></div>
+
+        <div style="margin-bottom: 20px;"></div>
+        <p>Extract and analyze skills from your resume. Switch between dark and light mode for your comfort! <br><br> Our Resume Skill Extractor helps you quickly identify key skills from your PDF resumes. Simply upload your file, and our tool will process it to present a categorized list of skills. This can be incredibly useful for job seekers looking to optimize their resumes or for recruiters analyzing candidate profiles. Use the search bar to find specific skills or browse through the categorized list. You can also save your extraction history to revisit previous analyses. We hope this tool simplifies the process of understanding and leveraging your skills! </p>
+        <p style="margin-top: 20px; font-size: 0.95rem; color: var(--secondary-text);">Looking to further enhance your resume? Check out these external tools that can help you analyze your resume's overall quality, provide a resume score, and offer suggestions for improvement:</p>
+        <ul>
+          <li><a href="https://www.mployee.me/" target="_blank">Check Resume on mployee.me</a></li>
+          <li><a href="https://www.resumeworded.com/" target="_blank">Try ResumeWorded</a></li>
+          <li><a href="https://zety.com/resume-check" target="_blank">Use Zety Resume Checker</a></li>
+          <li><a href="https://github.com/Abhi110704/Resume-Skill-Extractor" target="_blank"><i class="fab fa-github"></i> Check out our Resume Skill Extraction project on GitHub</a></li>
+        </ul>
+        <!-- Expand Button (initially hidden) -->
+        <button id="expandLeftSectionBtn" style="display: none; margin-top: 1rem; padding: 0.5rem 1rem; cursor: pointer;">Expand Reading Section</button>
+      </div>
+      <div class="right-section">
+        <!-- Resume Upload and Skill Extraction Section (with illustration) -->
+        <div id="extractorCard">
+          <div class="extractor-left-content">
+            <div class="extractor-images">
+              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User Icon" class="extractor-illustration" />
+              <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" alt="Resume Icon" class="extractor-illustration" />
+              <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png" alt="Profile Icon" class="extractor-illustration" />
+            </div>
+            <h3>Upload Your Resume (PDF)</h3>
+            <div class="extractor-actions">
+              <div class="extractor-file-row">
+                <input type="file" id="resumeFile" accept="application/pdf" />
+                <button id="uploadBtn" onclick="uploadResume()">Extract Skills</button>
+              </div>
+            </div>
+            <div id="status"></div>
+            <input type="text" id="skillSearch" placeholder="Search skill..." style="margin-bottom: 12px; width: 100%; max-width: 350px; padding: 8px; border-radius: 8px; border: 1px solid #bbb; font-size: 1rem;" oninput="filterSkills()" />
+          </div>
+          <div class="extractor-right-content">
+            <div id="skillsList"></div>
+          </div>
+        </div>
+        <!-- Extraction History Section (moved back inside right-section) -->
+        <div id="historySection">
+          <h3>Extraction History</h3>
+          <div id="historyList"></div>
+        </div>
+      </div>
+      <footer>
+        &copy; 2025 Abhiyanshu Anand, Sanskar Singh, Abhishek Singh
+      </footer>
+    </div>
+    <!-- Decorative Corner Images -->
+    <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png" class="corner-image bottomleft" alt="Decorative Profile" />
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" class="corner-image bottomright" alt="Decorative User 2" />
+    <!-- Floating Decorative Images -->
+    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" class="floating-img" alt="Floating Resume" style="top: 0.5%; right: 0.5%; animation-delay: 0s; animation-name: floatYExtended;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055676.png" class="floating-img" alt="Floating Laptop" style="top: 2%; left: 88%; animation-delay: 3s; animation-name: floatDiagExtended2;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055679.png" class="floating-img" alt="Floating Certificate" style="top: 88%; left: 0.5%; animation-delay: 1.5s; animation-name: floatLeftRight;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135783.png" class="floating-img" alt="Floating Calendar" style="top: 1%; right: 1%; animation-delay: 2.2s; animation-name: floatDiagExtended;" />
+    <!-- Floating Skill Icons -->
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" class="floating-img" alt="Floating Python Icon" style="top: 12%; left: 1%; animation-delay: 0.5s; animation-name: floatYExtended;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/277/277128.png" class="floating-img" alt="Floating SQL Icon" style="top: 32%; right: 1%; animation-delay: 1.8s; animation-name: floatYExtended;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" class="floating-img" alt="Floating JavaScript Icon" style="bottom: 8%; left: 1%; animation-delay: 2.5s; animation-name: floatDiagExtended;" />
+    <!-- Additional Floating Skill Icons -->
+    <img src="https://cdn-icons-png.flaticon.com/512/6132/6132222.png" class="floating-img" alt="Floating C++ Icon" style="top: 1%; right: 5%; animation-delay: 1s; animation-name: floatXExtended;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" class="floating-img" alt="Floating Java Icon" style="top: 60%; left: 1%; animation-delay: 3s; animation-name: floatDiagExtended2;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/755/755978.png" class="floating-img" alt="Floating React Icon" style="top: 20%; right: 10%; animation-delay: 0.2s; animation-name: floatYExtended;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/755/755981.png" class="floating-img" alt="Floating Angular Icon" style="bottom: 1%; right: 20%; animation-delay: 1.5s; animation-name: floatLeftRight;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/919/919853.png" class="floating-img" alt="Floating Docker Icon" style="bottom: 10%; right: 5%; animation-delay: 0.8s; animation-name: floatDiagExtended;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968420.png" class="floating-img" alt="Floating AWS Icon" style="top: 5%; left: 10%; animation-delay: 2.8s; animation-name: floatDiagExtended2;" />
+    <script>
+      // Theme toggle logic
+      const themeToggle = document.getElementById('themeToggle');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      }
+      // Initial theme
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      } else {
+        setTheme(prefersDark ? 'dark' : 'light');
+      }
+      themeToggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+      });
+
+      // Resume upload and skill extraction
+      let extractedSkills = [];
+      async function uploadResume() {
+        const fileInput = document.getElementById("resumeFile");
+        const status = document.getElementById("status");
+        const skillsList = document.getElementById("skillsList");
+        const skillSearch = document.getElementById("skillSearch");
+        skillsList.innerHTML = "";
+        status.innerText = "";
+        extractedSkills = [];
+        if (skillSearch) skillSearch.value = "";
+
+        if (!fileInput.files.length) {
+          status.innerText = "Please select a PDF file.";
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", fileInput.files[0]);
+
+        status.innerText = "File selected, attempting upload...";
+
+        try {
+          const response = await fetch("https://resume-backend-atll.onrender.com/extract-skills/", {
+            method: "POST",
+            body: formData,
+          });
+          const data = await response.json();
+          status.innerText = data.message || "";
+          if (data.skills && data.skills.length) {
+            extractedSkills = data.skills;
+            const categorized = categorizeSkills(extractedSkills);
+            renderSkills(categorized);
+          } else {
+            if (!data.message) {
+              skillsList.innerText = "No skills found.";
+            }
+          }
+        } catch (err) {
+          console.error(err);
+          status.innerText = "Failed to extract skills. Make sure your backend is running.";
+        }
+
+        // Save to history
+        if (extractedSkills.length > 0) {
+          saveHistory(fileInput.files[0].name, extractedSkills);
+          // Show history section if hidden
+          const historySection = document.getElementById('historySection');
+          if (historySection) {
+            historySection.style.display = ''; // Show the section
+          }
+          // Apply collapsed/expanded classes to sections
+          const leftSection = document.querySelector('.left-section');
+          const rightSection = document.querySelector('.right-section');
+          if (leftSection) leftSection.classList.add('collapsed-left');
+          if (rightSection) rightSection.classList.add('expanded-right');
+          // Apply split class to extractorCard
+          const extractorCard = document.getElementById('extractorCard');
+          if (extractorCard) extractorCard.classList.add('extractor-split');
+        }
+      }
+
+      // Define skill categories and keywords
+      const skillCategories = {
+        "Programming Languages": [
+          "python", "java", "javascript", "typescript", "c", "c++", "c#", "kotlin", "swift", "go", "ruby", "php", "r", "matlab", "scala", "rust"
+        ],
+        "Web Technologies & Frameworks": [
+          "html", "css", "sass", "less", "bootstrap", "tailwind", "react", "angular", "vue", "nodejs", "express", "nextjs", "flask", "django", "fastapi", "spring", "laravel"
+        ],
+        "Databases": [
+          "mysql", "postgresql", "mongodb", "sqlite", "oracle", "firebase", "redis", "cassandra", "neo4j"
+        ],
+        "Cloud & DevOps": [
+          "aws", "azure", "gcp", "heroku", "render", "netlify", "docker", "kubernetes", "jenkins", "terraform", "ansible", "nginx"
+        ],
+        "Data Science & Machine Learning": [
+          "pandas", "numpy", "scipy", "matplotlib", "seaborn", "scikit-learn", "tensorflow", "keras", "pytorch", "xgboost", "lightgbm",
+          "nlp", "opencv", "machine learning", "deep learning", "data analysis", "data science", "statistics", "ai"
+        ],
+        "Big Data & ETL": [
+          "hadoop", "spark", "hive", "pig", "airflow", "kafka", "tableau", "powerbi", "excel", "etl"
+        ],
+        "Tools & Platforms": [
+          "git", "github", "gitlab", "bitbucket", "jira", "notion", "postman", "vs code", "vim", "intellij"
+        ],
+        "Testing": [
+          "selenium", "pytest", "unittest", "junit", "cypress", "mocha", "chai"
+        ],
+        "Soft Skills": [
+          "communication", "leadership", "teamwork", "problem solving", "critical thinking", "time management",
+          "project management", "adaptability", "creativity", "negotiation", "presentation", "public speaking"
+        ]
+      };
+
+      // Function to categorize skills
+      function categorizeSkills(skills) {
+        const categorized = {};
+        const lowerCaseSkillCategories = {};
+        // Create a lower-case version of skillCategories for easier matching
+        for (const category in skillCategories) {
+            lowerCaseSkillCategories[category] = skillCategories[category].map(keyword => keyword.toLowerCase());
+        }
+
+        skills.forEach(skill => {
+          const lowerSkill = skill.toLowerCase();
+          let foundCategory = false;
+          for (const category in lowerCaseSkillCategories) {
+            if (lowerCaseSkillCategories[category].some(keyword => lowerSkill.includes(keyword))) {
+              if (!categorized[category]) {
+                categorized[category] = [];
+              }
+              categorized[category].push(skill);
+              foundCategory = true;
+              break; // Assume a skill belongs to the first matching category
+            }
+          }
+          if (!foundCategory) {
+            if (!categorized["Other"]) {
+              categorized["Other"] = [];
+            }
+            categorized["Other"].push(skill);
+          }
+        });
+        return categorized;
+      }
+
+      // Modify renderSkills to handle categorized data
+      function renderSkills(categorizedSkills) {
+        const skillsList = document.getElementById("skillsList");
+        skillsList.innerHTML = "";
+
+        const categories = Object.keys(categorizedSkills);
+        if (categories.length === 0 || (categories.length === 1 && categories[0] === "Other" && categorizedSkills["Other"].length === 0)) {
+             skillsList.innerText = "No matching skills found.";
+             return;
+        }
+
+        for (const category of categories) {
+          if (categorizedSkills[category].length > 0) {
+            const categoryHeading = document.createElement("h4");
+            categoryHeading.innerText = category;
+            categoryHeading.style.marginTop = "1.5rem";
+            categoryHeading.style.marginBottom = "0.8rem";
+            categoryHeading.style.color = "var(--primary-text)";
+            categoryHeading.style.textAlign = "left";
+            categoryHeading.style.width = "100%";
+            categoryHeading.style.maxWidth = "350px";
+            categoryHeading.style.margin = "1.5rem auto 0.8rem auto";
+             categoryHeading.style.background = "var(--card-bg)";
+             categoryHeading.style.borderRadius = "8px";
+             categoryHeading.style.padding = "0.4rem 0.3rem";
+             categoryHeading.style.boxShadow = "0 2px 8px rgba(0,0,0,0.04)";
+
+
+            skillsList.appendChild(categoryHeading);
+
+            const skillsContainer = document.createElement("div");
+            skillsContainer.style.display = "flex";
+            skillsContainer.style.flexWrap = "wrap";
+            skillsContainer.style.gap = "8px";
+            skillsContainer.style.justifyContent = "center";
+            skillsContainer.style.marginTop = "0.5rem";
+            skillsContainer.style.marginBottom = "1rem";
+
+
+            categorizedSkills[category].forEach(skill => {
+              const chip = document.createElement("span");
+              chip.innerText = skill;
+              chip.className = "skill-chip";
+              skillsContainer.appendChild(chip);
+            });
+            skillsList.appendChild(skillsContainer);
+          }
+        }
+      }
+
+      function filterSkills() {
+        const skillSearch = document.getElementById("skillSearch");
+        const query = skillSearch.value.trim().toLowerCase();
+        if (!query) {
+          renderSkills(categorizeSkills(extractedSkills)); // Recategorize and render all if query is empty
+        } else {
+          const filtered = extractedSkills.filter(skill => skill.toLowerCase().includes(query));
+          renderSkills(categorizeSkills(filtered)); // Categorize and render filtered skills
+        }
+      }
+
+      // Function to save history to local storage
+      function saveHistory(filename, skills) {
+        const history = JSON.parse(localStorage.getItem('extractionHistory') || '[]');
+        const newEntry = {
+          filename: filename,
+          skills: skills,
+          timestamp: new Date().toISOString()
+        };
+        history.push(newEntry);
+        localStorage.setItem('extractionHistory', JSON.stringify(history));
+        renderHistory(); // Re-render history after saving
+      }
+
+      // Function to render history from local storage
+      function renderHistory() {
+        const historyListDiv = document.getElementById('historyList');
+        if (!historyListDiv) return;
+
+        const history = JSON.parse(localStorage.getItem('extractionHistory') || '[]');
+        historyListDiv.innerHTML = ''; // Clear current list
+
+        if (history.length === 0) {
+          historyListDiv.innerHTML = '<p>No history yet.</p>';
+          // Hide history section if empty
+          const historySection = document.getElementById('historySection');
+          if (historySection) {
+            historySection.style.display = 'none';
+          }
+          return;
+        }
+
+        // Show history section if there is history data
+        const historySection = document.getElementById('historySection');
+        if (historySection) {
+          historySection.style.display = ''; // Show the section
+        }
+
+        history.forEach(entry => {
+          const entryElement = document.createElement('div');
+          entryElement.className = 'history-entry';
+          // Basic display: filename and timestamp
+          const date = new Date(entry.timestamp);
+          entryElement.innerHTML = `
+            <div class="history-entry-info">
+                <p class="history-entry-name"><strong>${entry.filename}</strong></p>
+                <p>${date.toLocaleString()}</p>
+                <p>${entry.skills.length} skills extracted</p>
+            </div>
+             <div class="history-entry-actions">
+                <i class="fas fa-trash history-entry-delete" data-timestamp="${entry.timestamp}"></i>
+            </div>
+          `;
+          // Add click listener to load history
+          entryElement.querySelector('.history-entry-info').addEventListener('click', () => loadFromHistory(entry.skills));
+          // Add click listener for delete button
+          entryElement.querySelector('.history-entry-delete').addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent triggering the loadFromHistory click
+            deleteHistoryEntry(e.target.dataset.timestamp);
+          });
+
+          historyListDiv.appendChild(entryElement);
+        });
+      }
+
+      // Function to delete a history entry
+      function deleteHistoryEntry(timestamp) {
+        let history = JSON.parse(localStorage.getItem('extractionHistory') || '[]');
+        history = history.filter(entry => entry.timestamp !== timestamp);
+        localStorage.setItem('extractionHistory', JSON.stringify(history));
+        renderHistory(); // Re-render history after deletion
+      }
+
+      // Function to load skills from a history entry
+      function loadFromHistory(skills) {
+        extractedSkills = skills; // Set the current extractedSkills to the historical data
+        const categorized = categorizeSkills(extractedSkills);
+        renderSkills(categorized); // Render the historical skills
+        const status = document.getElementById("status");
+        if (status) status.innerText = `Loaded ${skills.length} skills from history.`;
+        const skillSearch = document.getElementById("skillSearch");
+        if (skillSearch) skillSearch.value = ""; // Clear search input
+      }
+
+      // Call renderHistory on page load
+      renderHistory();
+
+      // Add event listener for the expand button
+      const expandButton = document.getElementById('expandLeftSectionBtn');
+      if (expandButton) {
+          expandButton.addEventListener('click', () => {
+              const leftSection = document.querySelector('.left-section');
+              const rightSection = document.querySelector('.right-section');
+              if (leftSection) leftSection.classList.remove('collapsed-left');
+              if (rightSection) rightSection.classList.remove('expanded-right');
+              // Hide the expand button when expanded
+              expandButton.style.display = 'none';
+              // Remove split class from extractorCard
+              const extractorCard = document.getElementById('extractorCard');
+              if (extractorCard) extractorCard.classList.remove('extractor-split');
+              // Need to make the content within the left section visible again
+              // Removing the collapsed-left class should handle this due to the CSS rule
+          });
+      }
+
+      // Also handle reverting the extractorCard split when the main sections are expanded back
+      const leftSection = document.querySelector('.left-section');
+      if (leftSection) {
+          leftSection.addEventListener('transitionend', () => {
+              // This event might fire for other transitions, so we need to check
+              // A simple check is to see if the collapsed-left class is absent
+              if (!leftSection.classList.contains('collapsed-left')) {
+                  const extractorCard = document.getElementById('extractorCard');
+                  if (extractorCard) extractorCard.classList.remove('extractor-split');
+              }
+          });
+      }
+    </script>
+  </body>
+</html>
