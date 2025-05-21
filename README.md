@@ -59,7 +59,7 @@ Visit: `http://localhost:3000`
 ### Frontend (Netlify)
 
 1. Go to [https://netlify.com](https://netlify.com)
-2. Click “New Site from Git” or drag your `index-integrated.html` and assets to deploy manually
+2. Click “New Site from Git” or drag your `index.html` and assets to deploy manually
 3. After deployment, you will get a public link
 
 ### Backend (Render)
