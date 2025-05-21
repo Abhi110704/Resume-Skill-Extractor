@@ -15,6 +15,7 @@
         background: var(--primary-bg);
         color: var(--primary-text);
         transition: background 0.3s, color 0.3s;
+        padding-top: 60px; /* Add padding to account for the fixed header */
       }
       :root {
         --primary-bg: #f4f4f4;
@@ -28,13 +29,14 @@
         --primary-bg: #181a1b;
         --primary-text: #f4f4f4;
         --secondary-bg: #23272a;
-        --accent: #00bfff;
+        --accent: #00bfff; /* Changed for dark blue accent */
         --card-bg: #23272a;
         --secondary-text: #bbb;
+        --dark-blue-accent: #1e90ff; /* Added dark blue accent color */
       }
       #root {
         max-width: 1200px;
-        margin: 60px auto 0 auto;
+        margin: 0 auto; /* Remove top margin as padding is added to body */
         padding: 2rem 1rem;
         display: flex;
         gap: 30px;
@@ -44,7 +46,7 @@
       }
       .left-section,
       .right-section {
-        flex: 1;
+        flex: 1 1 50%; /* Set flex-basis to 50% for equal initial size */
         min-width: 300px;
         background: rgba(255,255,255,0.18);
         border-radius: 24px;
@@ -53,6 +55,7 @@
         -webkit-backdrop-filter: blur(16px) saturate(180%);
         border: 2px solid rgba(255,255,255,0.25);
         padding: 2rem;
+        transition: all 0.5s ease; /* Add transition for smooth layout changes */
       }
       .left-section {
         text-align: center;
@@ -189,7 +192,7 @@
           right: 6px;
         }
         #root {
-          margin-top: 80px;
+          margin-top: 0; /* Remove margin-top */
           padding: 1rem 0.5rem;
         }
         .floating-img:not(.corner-image) {
@@ -216,6 +219,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        transition: all 0.5s ease; /* Add transition for smooth layout changes */
       }
       #extractorCard > *:not(.extractor-images) {
         background: var(--card-bg);
@@ -276,7 +280,16 @@
         color: #222;
         font-size: 0.98rem;
         margin-bottom: 5px;
-        transition: background 0.2s, color 0.2s;
+        transition: background 0.2s, color 0.2s, transform 0.3s ease, opacity 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeInChip 0.3s ease-out forwards;
+      }
+      @keyframes fadeInChip {
+          to { transform: translateY(0); opacity: 1; }
       }
       [data-theme="dark"] #extractorCard {
         background: var(--card-bg);
@@ -548,7 +561,7 @@
       }
       .left-section.collapsed-left {
         flex: unset;
-        width: 100%;
+        width: 100%; /* Ensure it still takes full width in collapsed state */
         max-width: 100%;
         height: 80px;
         overflow: hidden;
@@ -560,7 +573,7 @@
       .left-section.collapsed-left h2 {
         margin: 0;
       }
-      .left-section.collapsed-left > *:not(h2):not(#expandLeftSectionBtn) {
+      .left-section.collapsed-left > *:not(h2):not(#expandLeftSectionBtn):not(.external-links-container) {
         display: none;
       }
       .left-section.collapsed-left #expandLeftSectionBtn {
@@ -578,28 +591,41 @@
       }
       .extractor-left-content {
         flex: 1;
-        max-width: 400px;
         padding-right: 1rem;
       }
       .extractor-right-content {
-        flex: 2;
+        flex: 1;
         min-width: 300px;
+        padding-left: 1rem; /* Add padding for separation */
       }
       #extractorCard > *:not(.extractor-images) {
-        /* Remove styles that are now handled by extractor-left-content/right-content */
-        /* These styles were causing elements to overflow when not in a flex column */
-        /* background: var(--card-bg); */
-        /* border-radius: 8px; */
-        /* width: 100%; */
-        /* max-width: 400px; */
-        /* margin: 0.5rem auto; */
-        /* box-shadow: 0 2px 8px rgba(0,0,0,0.04); */
-        /* padding: 0.8rem; */
-        /* box-sizing: border-box; */
       }
       #skillSearch {
         box-sizing: border-box;
         width: 100%;
+      }
+      /* Styles for Skill Domain Progress Bars */
+      .domain-progress-item {
+          margin-bottom: 12px;
+      }
+      .domain-progress-item p {
+          margin: 0 0 4px 0;
+          font-size: 0.9rem;
+          color: var(--secondary-text);
+      }
+      .domain-progress-bar-container {
+          width: 100%;
+          background-color: var(--secondary-bg);
+          border-radius: 12px;
+          overflow: hidden;
+          height: 12px;
+          box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+      }
+      .domain-progress-bar {
+          height: 100%;
+          background-color: var(--accent); /* Use accent color for the bar */
+          border-radius: 12px;
+          transition: width 0.5s ease-in-out;
       }
     </style>
     <style>
@@ -617,49 +643,277 @@
           0 0 151px #00bfff;
       }
     </style>
+    <style>
+      /* Top Bar Styling */
+      .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: var(--card-bg); /* Use card background for the top bar */
+        color: var(--primary-text);
+        padding: 0.5rem 1.5rem; /* Adjusted padding */
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* Space out content */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        backdrop-filter: blur(8px) saturate(180%);
+        -webkit-backdrop-filter: blur(8px) saturate(180%);
+        border-bottom: 2px solid rgba(0, 123, 255, 0.15);
+        box-sizing: border-box; /* Include padding in the element's total width and height */
+      }
+      .top-bar .project-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .top-bar .project-info img {
+        height: 30px;
+      }
+      .top-bar .project-info h1 {
+        font-size: 1.5rem;
+        margin: 0;
+        color: var(--accent);
+      }
+      .top-bar .github-links {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        /* margin-right: 20px; Removed margin, padding on parent handles spacing */
+      }
+      .top-bar .github-links a {
+        color: var(--primary-text); /* Use primary text color for links */
+        text-decoration: none;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        transition: color 0.2s;
+      }
+      .top-bar .github-links a:hover {
+        color: var(--accent); /* Accent color on hover */
+      }
+      .top-bar .theme-toggle {
+          position: static; /* Remove fixed positioning */
+          /* margin-left: 10px; Removed margin, padding on parent handles spacing */
+          top: auto; /* Reset top */
+          right: auto; /* Reset right */
+      }
+      @media (max-width: 768px) {
+        .top-bar {
+          flex-direction: column;
+          height: auto;
+          padding: 0.5rem 1rem; /* Adjusted padding */
+          gap: 10px;
+        }
+        .top-bar .github-links {
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 10px;
+           margin-right: 0; /* Remove margin on smaller screens */
+        }
+         body {
+            padding-top: 90px; /* Adjust padding for smaller screens */
+         }
+         .top-bar .theme-toggle {
+             margin-left: 0; /* Remove margin on smaller screens */
+         }
+      }
+      @media (max-width: 500px) {
+           body {
+              padding-top: 120px; /* Adjust padding for very small screens */
+           }
+           .top-bar {
+               padding: 0.5rem 0.8rem; /* Further adjusted padding for very small screens */
+           }
+        }
+    </style>
+    <style>
+      /* General Animations */
+      .fade-in {
+        animation: fadeIn 1s ease-out;
+      }
+      @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+
+      .slide-in-left {
+        animation: slideInLeft 0.8s ease-out;
+      }
+      @keyframes slideInLeft {
+        0% { transform: translateX(-50px); opacity: 0; }
+        100% { transform: translateX(0); opacity: 1; }
+      }
+
+      .slide-in-right {
+        animation: slideInRight 0.8s ease-out;
+      }
+      @keyframes slideInRight {
+        0% { transform: translateX(50px); opacity: 0; }
+        100% { transform: translateX(0); opacity: 1; }
+      }
+
+      /* Add more specific animations as needed */
+    </style>
+    <style>
+      /* Styles for external links grid and divider */
+      .external-links-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px; /* Space between the two columns */
+        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        padding: 0 1rem; /* Add horizontal padding for consistent spacing */
+      }
+
+      .external-links-column {
+        flex: 1;
+        min-width: 280px; /* Minimum width for each column before wrapping */
+        max-width: 400px;
+      }
+
+      .external-links-column ul {
+          list-style: none;
+          padding: 0;
+          text-align: left;
+          margin: 0 auto; /* Center the list within the column if the column is wider */
+          max-width: 350px; /* Set a max width to prevent lists from becoming too wide */
+      }
+
+      .external-links-column li {
+          margin: 0.8rem 0; /* Adjust vertical spacing */
+      }
+
+      .divider {
+        border-left: 1px solid var(--secondary-text); /* Add a vertical divider */
+      }
+
+      /* Adjust layout for split view with divider */
+       #extractorCard.extractor-split .extractor-left-content {
+           border-right: 1px solid var(--secondary-text); /* Add divider in split view */
+           padding-right: 2rem; /* Increase padding to the right */
+       }
+
+       #extractorCard.extractor-split .extractor-right-content {
+           padding-left: 2rem; /* Increase padding to the left */
+       }
+
+       @media (max-width: 700px) {
+           .external-links-container {
+               flex-direction: column; /* Stack columns on smaller screens */
+               gap: 0; /* Remove gap when stacked */
+           }
+           .external-links-column {
+               min-width: unset; /* Remove min-width when stacked */
+               max-width: 100%;
+           }
+           .external-links-column ul {
+               margin-bottom: 1rem; /* Add space between stacked lists */
+           }
+           #extractorCard.extractor-split .extractor-left-content {
+                border-right: none; /* Remove vertical divider when stacked */
+                padding-right: 1rem; /* Revert padding */
+           }
+            #extractorCard.extractor-split .extractor-right-content {
+                padding-left: 1rem; /* Revert padding */
+            }
+       }
+
+    </style>
+    <style>
+      /* Styles for new top bar buttons */
+      .top-bar-button {
+        background: none;
+        border: none;
+        color: var(--primary-text);
+        font-size: 1rem;
+        font-family: inherit;
+        cursor: pointer;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        transition: background 0.2s, color 0.2s;
+      }
+      .top-bar-button:hover {
+        background: var(--accent);
+        color: #fff;
+      }
+      @media (max-width: 768px) {
+         .top-bar-button {
+             padding: 0.3rem 0.6rem;
+             font-size: 0.9rem;
+         }
+      }
+       @media (max-width: 500px) {
+          .top-bar-button {
+              padding: 0.2rem 0.4rem;
+              font-size: 0.8rem;
+          }
+       }
+    </style>
   </head>
   <body>
+    <!-- Top Bar -->
+    <header class="top-bar">
+      <div class="project-info">
+        
+        <h1>Resume Skill Extractor</h1>
+      </div>
+      <div class="github-links">
+        <a href="https://github.com/abhishek-si-ngh" target="_blank">
+          <i class="fab fa-github"></i> Abhishek Singh
+        </a>
+        <a href="https://github.com/Abhi110704" target="_blank">
+          <i class="fab fa-github"></i> Abhiyanshu Anand
+        </a>
+        <a href="https://github.com/Sanskar2301" target="_blank">
+          <i class="fab fa-github"></i> Sanskar Singh
+        </a>
+        <!-- New Scroll Buttons -->
+        <button class="top-bar-button" id="scrollToInfoBtn">Information</button>
+        <button class="top-bar-button" id="scrollToUploadBtn">Upload Resume</button>
+      </div>
+      <!-- Theme Toggle Button (Moved here) -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+        <i class="fas fa-moon"></i>
+      </button>
+    </header>
+
     <!-- Floating Social Icons -->
     <div class="floating-icons">
       <!-- GitHub icons are now handled by the React app -->
     </div>
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
-      <i class="fas fa-moon"></i>
-    </button>
     <div id="root">
-      <div class="left-section">
+      <div class="left-section fade-in">
         <h2>Resume Skill Extractor</h2>
-        <div style="display: flex; justify-content: center; gap: 24px; margin: 18px 0 10px 0;">
-          <a href="https://github.com/abhishek-si-ngh" target="_blank" style="color: #111; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 6px;">
-            <i class="fab fa-github"></i> Abhishek Singh
-          </a>
-          <a href="https://github.com/Abhi110704" target="_blank" style="color: #111; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 6px;">
-            <i class="fab fa-github"></i> Abhiyanshu Anand
-          </a>
-          <a href="https://github.com/Sanskar2301" target="_blank" style="color: #111; font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 6px;">
-            <i class="fab fa-github"></i> Sanskar Singh
-          </a>
-        </div>
-
-        <!-- Spacing after GitHub links -->
         <div style="margin-bottom: 30px;"></div>
-
         <div style="margin-bottom: 20px;"></div>
         <p>Extract and analyze skills from your resume. Switch between dark and light mode for your comfort! <br><br> Our Resume Skill Extractor helps you quickly identify key skills from your PDF resumes. Simply upload your file, and our tool will process it to present a categorized list of skills. This can be incredibly useful for job seekers looking to optimize their resumes or for recruiters analyzing candidate profiles. Use the search bar to find specific skills or browse through the categorized list. You can also save your extraction history to revisit previous analyses. We hope this tool simplifies the process of understanding and leveraging your skills! </p>
         <p style="margin-top: 20px; font-size: 0.95rem; color: var(--secondary-text);">Looking to further enhance your resume? Check out these external tools that can help you analyze your resume's overall quality, provide a resume score, and offer suggestions for improvement:</p>
-        <ul>
-          <li><a href="https://www.mployee.me/" target="_blank">Check Resume on mployee.me</a></li>
-          <li><a href="https://www.resumeworded.com/" target="_blank">Try ResumeWorded</a></li>
-          <li><a href="https://zety.com/resume-check" target="_blank">Use Zety Resume Checker</a></li>
-          <li><a href="https://github.com/Abhi110704/Resume-Skill-Extractor" target="_blank"><i class="fab fa-github"></i> Check out our Resume Skill Extraction project on GitHub</a></li>
-        </ul>
+        <div class="external-links-container">
+          <div class="external-links-column">
+            <ul class="external-links-list">
+              <li><a href="https://www.mployee.me/" target="_blank"><i class="fas fa-link"></i> Check Resume on mployee.me <i class="fas fa-arrow-right"></i></a></li>
+              <li><a href="https://www.resumeworded.com/" target="_blank"><i class="fas fa-link"></i> Try ResumeWorded <i class="fas fa-arrow-right"></i></a></li>
+            </ul>
+          </div>
+          <div class="external-links-column">
+            <ul class="external-links-list">
+              <li><a href="https://zety.com/resume-check" target="_blank"><i class="fas fa-link"></i> Use Zety Resume Checker <i class="fas fa-arrow-right"></i></a></li>
+              <li><a href="https://github.com/Abhi110704/Resume-Skill-Extractor" target="_blank"><i class="fab fa-github"></i> Check out our project on GitHub <i class="fas fa-arrow-right"></i></a></li>
+            </ul>
+          </div>
+        </div>
         <!-- Expand Button (initially hidden) -->
-        <button id="expandLeftSectionBtn" style="display: none; margin-top: 1rem; padding: 0.5rem 1rem; cursor: pointer;">Expand Reading Section</button>
+        <button id="expandLeftSectionBtn" style="display: none; margin-top: 1rem; padding: 0.5rem 1rem; cursor: pointer; border-radius: 20px; border: none; background-color: var(--accent); color: white; font-size: 1rem;">Expand Reading Section</button>
+         
+         <!-- Scroll to History Button -->
+        <button id="scrollToHistoryBtn" style="margin-top: 1rem; padding: 0.5rem 1rem; cursor: pointer; border-radius: 20px; border: none; background-color: var(--accent); color: white; font-size: 1rem; display: none;">Go to History</button>
       </div>
-      <div class="right-section">
+      <div class="right-section fade-in">
         <!-- Resume Upload and Skill Extraction Section (with illustration) -->
-        <div id="extractorCard">
+        <div id="extractorCard" class="fade-in">
           <div class="extractor-left-content">
             <div class="extractor-images">
               <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="User Icon" class="extractor-illustration" />
@@ -675,15 +929,22 @@
             </div>
             <div id="status"></div>
             <input type="text" id="skillSearch" placeholder="Search skill..." style="margin-bottom: 12px; width: 100%; max-width: 350px; padding: 8px; border-radius: 8px; border: 1px solid #bbb; font-size: 1rem;" oninput="filterSkills()" />
+            <!-- Skill Domain Progress Bars (Moved here) -->
+            <div id="domainProgress" style="width: 100%; max-width: 400px; margin: 20px auto;"></div>
+            <!-- View History Button -->
+            <button id="showHistoryBtn" style="margin-top: 1rem; padding: 0.6rem 1.5rem; cursor: pointer; border-radius: 20px; border: none; background-color: var(--accent); color: white; font-size: 1rem; display: none;">View History</button>
           </div>
           <div class="extractor-right-content">
             <div id="skillsList"></div>
+            <!-- Clear Skills Button -->
+            <button id="clearSkillsBtn" style="margin-top: 1rem; padding: 0.6rem 1.5rem; cursor: pointer; border-radius: 20px; border: none; background-color: #ff4d4d; color: white; font-size: 1rem; transition: background-color 0.2s;" >Clear Skills</button>
           </div>
         </div>
         <!-- Extraction History Section (moved back inside right-section) -->
         <div id="historySection">
           <h3>Extraction History</h3>
           <div id="historyList"></div>
+          
         </div>
       </div>
       <footer>
@@ -691,24 +952,24 @@
       </footer>
     </div>
     <!-- Decorative Corner Images -->
-    <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png" class="corner-image bottomleft" alt="Decorative Profile" />
-    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" class="corner-image bottomright" alt="Decorative User 2" />
+    
+    
     <!-- Floating Decorative Images -->
-    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" class="floating-img" alt="Floating Resume" style="top: 0.5%; right: 0.5%; animation-delay: 0s; animation-name: floatYExtended;" />
-    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055676.png" class="floating-img" alt="Floating Laptop" style="top: 2%; left: 88%; animation-delay: 3s; animation-name: floatDiagExtended2;" />
-    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055679.png" class="floating-img" alt="Floating Certificate" style="top: 88%; left: 0.5%; animation-delay: 1.5s; animation-name: floatLeftRight;" />
-    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135783.png" class="floating-img" alt="Floating Calendar" style="top: 1%; right: 1%; animation-delay: 2.2s; animation-name: floatDiagExtended;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" class="floating-img float-diag" alt="Floating Resume" style="top: 5%; right: 5%; animation-delay: 0s;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055676.png" class="floating-img float-diag2" alt="Floating Laptop" style="top: 10%; left: 85%; animation-delay: 3s;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/1055/1055679.png" class="floating-img float-left-right" alt="Floating Certificate" style="bottom: 10%; left: 5%; animation-delay: 1.5s;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135783.png" class="floating-img float-fast" alt="Floating Calendar" style="top: 5%; right: 10%; animation-delay: 2.2s;" />
     <!-- Floating Skill Icons -->
-    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" class="floating-img" alt="Floating Python Icon" style="top: 12%; left: 1%; animation-delay: 0.5s; animation-name: floatYExtended;" />
-    <img src="https://cdn-icons-png.flaticon.com/512/277/277128.png" class="floating-img" alt="Floating SQL Icon" style="top: 32%; right: 1%; animation-delay: 1.8s; animation-name: floatYExtended;" />
-    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" class="floating-img" alt="Floating JavaScript Icon" style="bottom: 8%; left: 1%; animation-delay: 2.5s; animation-name: floatDiagExtended;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" class="floating-img float-diag" alt="Floating Python Icon" style="top: 15%; left: 5%; animation-delay: 0.5s;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/277/277128.png" class="floating-img float-diag2" alt="Floating SQL Icon" style="top: 35%; right: 5%; animation-delay: 1.8s;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" class="floating-img float-left-right" alt="Floating JavaScript Icon" style="bottom: 15%; left: 5%; animation-delay: 2.5s;" />
     <!-- Additional Floating Skill Icons -->
-    <img src="https://cdn-icons-png.flaticon.com/512/6132/6132222.png" class="floating-img" alt="Floating C++ Icon" style="top: 1%; right: 5%; animation-delay: 1s; animation-name: floatXExtended;" />
-    <img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" class="floating-img" alt="Floating Java Icon" style="top: 60%; left: 1%; animation-delay: 3s; animation-name: floatDiagExtended2;" />
-    <img src="https://cdn-icons-png.flaticon.com/512/755/755978.png" class="floating-img" alt="Floating React Icon" style="top: 20%; right: 10%; animation-delay: 0.2s; animation-name: floatYExtended;" />
-    <img src="https://cdn-icons-png.flaticon.com/512/755/755981.png" class="floating-img" alt="Floating Angular Icon" style="bottom: 1%; right: 20%; animation-delay: 1.5s; animation-name: floatLeftRight;" />
-    <img src="https://cdn-icons-png.flaticon.com/512/919/919853.png" class="floating-img" alt="Floating Docker Icon" style="bottom: 10%; right: 5%; animation-delay: 0.8s; animation-name: floatDiagExtended;" />
-    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968420.png" class="floating-img" alt="Floating AWS Icon" style="top: 5%; left: 10%; animation-delay: 2.8s; animation-name: floatDiagExtended2;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/6132/6132222.png" class="floating-img float-fast" alt="Floating C++ Icon" style="top: 5%; right: 15%; animation-delay: 1s;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" class="floating-img float-diag" alt="Floating Java Icon" style="top: 60%; left: 5%; animation-delay: 3s;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/755/755978.png" class="floating-img float-diag2" alt="Floating React Icon" style="top: 25%; right: 15%; animation-delay: 0.2s;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/755/755981.png" class="floating-img float-left-right" alt="Floating Angular Icon" style="bottom: 5%; right: 25%; animation-delay: 1.5s;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/919/919853.png" class="floating-img float-fast" alt="Floating Docker Icon" style="bottom: 15%; right: 10%; animation-delay: 0.8s;" />
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968420.png" class="floating-img float-diag" alt="Floating AWS Icon" style="top: 10%; left: 15%; animation-delay: 2.8s;" />
     <script>
       // Theme toggle logic
       const themeToggle = document.getElementById('themeToggle');
@@ -737,6 +998,9 @@
         const status = document.getElementById("status");
         const skillsList = document.getElementById("skillsList");
         const skillSearch = document.getElementById("skillSearch");
+        
+        const scrollToHistoryBtn = document.getElementById('scrollToHistoryBtn');
+
         skillsList.innerHTML = "";
         status.innerText = "";
         extractedSkills = [];
@@ -775,20 +1039,28 @@
 
         // Save to history
         if (extractedSkills.length > 0) {
+          console.log('Attempting to save history.');
           saveHistory(fileInput.files[0].name, extractedSkills);
+          console.log('History saved.');
           // Show history section if hidden
           const historySection = document.getElementById('historySection');
           if (historySection) {
             historySection.style.display = ''; // Show the section
           }
-          // Apply collapsed/expanded classes to sections
-          const leftSection = document.querySelector('.left-section');
-          const rightSection = document.querySelector('.right-section');
-          if (leftSection) leftSection.classList.add('collapsed-left');
-          if (rightSection) rightSection.classList.add('expanded-right');
-          // Apply split class to extractorCard
-          const extractorCard = document.getElementById('extractorCard');
-          if (extractorCard) extractorCard.classList.add('extractor-split');
+          // Scroll to the extractor card section
+          document.getElementById('extractorCard').scrollIntoView({ behavior: 'smooth' });
+
+          // Show View History button after extraction if there's history
+          const showHistoryBtn = document.getElementById('showHistoryBtn');
+          if (showHistoryBtn) {
+              showHistoryBtn.style.display = 'block';
+          }
+
+          // Add event listener for Clear Skills button
+          const clearSkillsBtn = document.getElementById('clearSkillsBtn');
+          if (clearSkillsBtn) {
+              clearSkillsBtn.addEventListener('click', clearSkills);
+          }
         }
       }
 
@@ -860,7 +1132,10 @@
       // Modify renderSkills to handle categorized data
       function renderSkills(categorizedSkills) {
         const skillsList = document.getElementById("skillsList");
+        const domainProgressDiv = document.getElementById("domainProgress");
+
         skillsList.innerHTML = "";
+        if (domainProgressDiv) domainProgressDiv.innerHTML = ""; // Clear previous progress bars
 
         const categories = Object.keys(categorizedSkills);
         if (categories.length === 0 || (categories.length === 1 && categories[0] === "Other" && categorizedSkills["Other"].length === 0)) {
@@ -868,10 +1143,39 @@
              return;
         }
 
+        // Calculate max skills in a single domain for progress bar scaling
+        let maxSkillsInDomain = 0;
+        for (const category of categories) {
+            if (categorizedSkills[category].length > maxSkillsInDomain) {
+                maxSkillsInDomain = categorizedSkills[category].length;
+            }
+        }
+
+        // Render progress bars
+        if (domainProgressDiv) {
+            for (const category of categories) {
+                if (categorizedSkills[category].length > 0) {
+                    const skillCount = categorizedSkills[category].length;
+                    const percentage = maxSkillsInDomain > 0 ? (skillCount / maxSkillsInDomain) * 100 : 0;
+
+                    const progressItemHtml = `
+                        <div class="domain-progress-item">
+                            <p>${category} (${skillCount})</p>
+                            <div class="domain-progress-bar-container">
+                                <div class="domain-progress-bar" style="width: ${percentage}%;"></div>
+                            </div>
+                        </div>
+                    `;
+                    domainProgressDiv.innerHTML += progressItemHtml;
+                }
+            }
+        }
+
+        // Render categorized skills list
         for (const category of categories) {
           if (categorizedSkills[category].length > 0) {
             const categoryHeading = document.createElement("h4");
-            categoryHeading.innerText = category;
+            categoryHeading.innerText = `${category} (${categorizedSkills[category].length})`; // Add count
             categoryHeading.style.marginTop = "1.5rem";
             categoryHeading.style.marginBottom = "0.8rem";
             categoryHeading.style.color = "var(--primary-text)";
@@ -879,10 +1183,6 @@
             categoryHeading.style.width = "100%";
             categoryHeading.style.maxWidth = "350px";
             categoryHeading.style.margin = "1.5rem auto 0.8rem auto";
-             categoryHeading.style.background = "var(--card-bg)";
-             categoryHeading.style.borderRadius = "8px";
-             categoryHeading.style.padding = "0.4rem 0.3rem";
-             categoryHeading.style.boxShadow = "0 2px 8px rgba(0,0,0,0.04)";
 
 
             skillsList.appendChild(categoryHeading);
@@ -898,13 +1198,35 @@
 
             categorizedSkills[category].forEach(skill => {
               const chip = document.createElement("span");
-              chip.innerText = skill;
+              // Add icon placeholder - replace with actual icons later if needed
+              const iconHtml = getSkillIcon(skill);
+              chip.innerHTML = `${iconHtml}${skill}`;
               chip.className = "skill-chip";
               skillsContainer.appendChild(chip);
             });
             skillsList.appendChild(skillsContainer);
           }
         }
+      }
+
+      // Helper function to get skill icon (placeholder)
+      function getSkillIcon(skill) {
+          const lowerSkill = skill.toLowerCase();
+          // Basic icon mapping (expand as needed)
+          if (lowerSkill.includes('python')) return '<i class="fab fa-python"></i> ';
+          if (lowerSkill.includes('java')) return '<i class="fab fa-java"></i> ';
+          if (lowerSkill.includes('javascript') || lowerSkill.includes('js')) return '<i class="fab fa-js"></i> ';
+          if (lowerSkill.includes('react')) return '<i class="fab fa-react"></i> ';
+          if (lowerSkill.includes('angular')) return '<i class="fab fa-angular"></i> ';
+          if (lowerSkill.includes('vue')) return '<i class="fab fa-vuejs"></i> ';
+          if (lowerSkill.includes('html')) return '<i class="fab fa-html5"></i> ';
+          if (lowerSkill.includes('css')) return '<i class="fab fa-css3-alt"></i> ';
+          if (lowerSkill.includes('git')) return '<i class="fab fa-git-alt"></i> ';
+          if (lowerSkill.includes('github')) return '<i class="fab fa-github"></i> ';
+          if (lowerSkill.includes('docker')) return '<i class="fab fa-docker"></i> ';
+          if (lowerSkill.includes('aws')) return '<i class="fab fa-aws"></i> ';
+          // Add more mappings for other skills/domains
+          return ''; // Default empty string if no icon found
       }
 
       function filterSkills() {
@@ -920,27 +1242,42 @@
 
       // Function to save history to local storage
       function saveHistory(filename, skills) {
+        console.log('saveHistory called with:', {filename, skills});
         const history = JSON.parse(localStorage.getItem('extractionHistory') || '[]');
+        console.log('Current history from local storage:', history);
         const newEntry = {
           filename: filename,
           skills: skills,
           timestamp: new Date().toISOString()
         };
         history.push(newEntry);
-        localStorage.setItem('extractionHistory', JSON.stringify(history));
+        console.log('New history array:', history);
+        try {
+            localStorage.setItem('extractionHistory', JSON.stringify(history));
+            console.log('History successfully written to local storage.');
+        } catch (e) {
+            console.error('Error saving history to local storage:', e);
+        }
         renderHistory(); // Re-render history after saving
+        console.log('renderHistory called from saveHistory.');
       }
 
       // Function to render history from local storage
       function renderHistory() {
+        console.log('renderHistory called.');
         const historyListDiv = document.getElementById('historyList');
-        if (!historyListDiv) return;
+        if (!historyListDiv) {
+            console.log('historyListDiv not found.');
+            return;
+        }
 
         const history = JSON.parse(localStorage.getItem('extractionHistory') || '[]');
+        console.log('History read from local storage for rendering:', history);
         historyListDiv.innerHTML = ''; // Clear current list
 
         if (history.length === 0) {
           historyListDiv.innerHTML = '<p>No history yet.</p>';
+          console.log('History is empty, hiding history section.');
           // Hide history section if empty
           const historySection = document.getElementById('historySection');
           if (historySection) {
@@ -953,9 +1290,11 @@
         const historySection = document.getElementById('historySection');
         if (historySection) {
           historySection.style.display = ''; // Show the section
+          console.log('History is not empty, showing history section.');
         }
 
         history.forEach(entry => {
+          console.log('Rendering history entry:', entry);
           const entryElement = document.createElement('div');
           entryElement.className = 'history-entry';
           // Basic display: filename and timestamp
@@ -999,10 +1338,56 @@
         if (status) status.innerText = `Loaded ${skills.length} skills from history.`;
         const skillSearch = document.getElementById("skillSearch");
         if (skillSearch) skillSearch.value = ""; // Clear search input
+
+        // Hide the scroll-to-extractor button and show the scroll-to-history button
+        const scrollToExtractorBtn = document.getElementById('scrollToExtractorBtn');
+        const scrollToHistoryBtn = document.getElementById('scrollToHistoryBtn');
+         if (scrollToExtractorBtn) scrollToExtractorBtn.style.display = 'none';
+         if (scrollToHistoryBtn) scrollToHistoryBtn.style.display = 'block';
+      }
+
+      // Function to clear extracted skills
+      function clearSkills() {
+          extractedSkills = [];
+          const skillsList = document.getElementById('skillsList');
+          const domainProgressDiv = document.getElementById("domainProgress");
+          if (skillsList) skillsList.innerHTML = '';
+          if (domainProgressDiv) domainProgressDiv.innerHTML = ''; // Clear progress bars
+          const status = document.getElementById('status');
+          if (status) status.innerText = 'Skills cleared.';
+          const skillSearch = document.getElementById('skillSearch');
+          if (skillSearch) skillSearch.value = '';
+
+          // Optionally, revert the layout back to initial state
+          const leftSection = document.querySelector('.left-section');
+          const rightSection = document.querySelector('.right-section');
+          const extractorCard = document.getElementById('extractorCard');
+          const historySection = document.getElementById('historySection');
+
+          if (leftSection) leftSection.classList.remove('collapsed-left');
+          if (rightSection) rightSection.classList.remove('expanded-right');
+          if (extractorCard) extractorCard.classList.remove('extractor-split');
+
+          // Hide history section
+          if (historySection) historySection.style.display = 'none';
+
+          // Show scroll-to-extractor button and hide scroll-to-history button
+          
+          const scrollToHistoryBtn = document.getElementById('scrollToHistoryBtn');
+            
+            if (scrollToHistoryBtn) scrollToHistoryBtn.style.display = 'none';
+
+            // Hide View History button
+            const showHistoryBtn = document.getElementById('showHistoryBtn');
+            if (showHistoryBtn) {
+                 showHistoryBtn.style.display = 'none';
+                 console.log('View History button display set to none in clearSkills.');
+            }
       }
 
       // Call renderHistory on page load
       renderHistory();
+      console.log('Initial renderHistory call on page load.');
 
       // Add event listener for the expand button
       const expandButton = document.getElementById('expandLeftSectionBtn');
@@ -1019,6 +1404,21 @@
               if (extractorCard) extractorCard.classList.remove('extractor-split');
               // Need to make the content within the left section visible again
               // Removing the collapsed-left class should handle this due to the CSS rule
+
+               // Show the scroll-to-extractor button again
+               
+               // Hide scroll-to-history button
+               const scrollToHistoryBtn = document.getElementById('scrollToHistoryBtn');
+               if (scrollToHistoryBtn) {
+                   scrollToHistoryBtn.style.display = 'none';
+               }
+
+               // Hide View History button
+               const showHistoryBtn = document.getElementById('showHistoryBtn');
+               if (showHistoryBtn) {
+                   showHistoryBtn.style.display = 'none';
+                   console.log('View History button display set to none in expand button handler.');
+               }
           });
       }
 
@@ -1034,6 +1434,69 @@
               }
           });
       }
+
+       // Add event listener for scroll-to-history button
+       const scrollToHistoryBtn = document.getElementById('scrollToHistoryBtn');
+       if (scrollToHistoryBtn) {
+           scrollToHistoryBtn.addEventListener('click', () => {
+               const historySection = document.getElementById('historySection');
+               console.log('History button clicked.');
+               console.log('History section element:', historySection);
+               console.log('History section display style:', historySection ? historySection.style.display : 'N/A');
+               // Ensure history section is visible before attempting to scroll
+               if (historySection && historySection.style.display !== 'none') {
+                    historySection.scrollIntoView({ behavior: 'smooth' });
+                    console.log('Scrolled to history section.');
+               } else {
+                   console.log('History section not visible, not scrolling.');
+               }
+           });
+       }
+        renderHistory();
+        console.log('Second renderHistory call at the end of the script.');
+
+       // Add event listeners for the new top bar buttons
+       const scrollToInfoButton = document.getElementById('scrollToInfoBtn');
+       if (scrollToInfoButton) {
+           scrollToInfoButton.addEventListener('click', () => {
+               const infoSection = document.querySelector('.left-section');
+               if (infoSection) {
+                   infoSection.scrollIntoView({ behavior: 'smooth' });
+               }
+           });
+       }
+
+       const scrollToUploadButton = document.getElementById('scrollToUploadBtn');
+       if (scrollToUploadButton) {
+           scrollToUploadButton.addEventListener('click', () => {
+               const uploadSection = document.getElementById('extractorCard');
+               if (uploadSection) {
+                   uploadSection.scrollIntoView({ behavior: 'smooth' });
+               }
+           });
+       }
+
+       // Add event listener for the View History button in extractorCard
+       const showHistoryButton = document.getElementById('showHistoryBtn');
+       if (showHistoryButton) {
+           showHistoryButton.addEventListener('click', () => {
+               console.log('View History button clicked.');
+               const historySection = document.getElementById('historySection');
+               if (historySection) {
+                   console.log('History section element found.', historySection);
+                   console.log('History section display style:', historySection.style.display);
+                   // Ensure history section is visible before attempting to scroll
+                   if (historySection.style.display === 'none') {
+                       historySection.style.display = ''; // Make visible if hidden
+                       console.log('History section made visible.');
+                   }
+                   historySection.scrollIntoView({ behavior: 'smooth' });
+                   console.log('Scrolled to history section.');
+               } else {
+                   console.log('History section element not found.');
+               }
+           });
+       }
     </script>
   </body>
 </html>
