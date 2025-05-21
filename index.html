@@ -15,7 +15,7 @@
         background: var(--primary-bg);
         color: var(--primary-text);
         transition: background 0.3s, color 0.3s;
-        padding-top: 60px; /* Add padding to account for the fixed header */
+        padding-top: 80px;
       }
       :root {
         --primary-bg: #f4f4f4;
@@ -29,14 +29,14 @@
         --primary-bg: #181a1b;
         --primary-text: #f4f4f4;
         --secondary-bg: #23272a;
-        --accent: #00bfff; /* Changed for dark blue accent */
+        --accent: #00bfff;
         --card-bg: #23272a;
         --secondary-text: #bbb;
-        --dark-blue-accent: #1e90ff; /* Added dark blue accent color */
+        --dark-blue-accent: #1e90ff;
       }
       #root {
         max-width: 1200px;
-        margin: 0 auto; /* Remove top margin as padding is added to body */
+        margin: 0 auto;
         padding: 2rem 1rem;
         display: flex;
         gap: 30px;
@@ -46,7 +46,7 @@
       }
       .left-section,
       .right-section {
-        flex: 1 1 50%; /* Set flex-basis to 50% for equal initial size */
+        flex: 1 1 50%;
         min-width: 300px;
         background: rgba(255,255,255,0.18);
         border-radius: 24px;
@@ -55,7 +55,7 @@
         -webkit-backdrop-filter: blur(16px) saturate(180%);
         border: 2px solid rgba(255,255,255,0.25);
         padding: 2rem;
-        transition: all 0.5s ease; /* Add transition for smooth layout changes */
+        transition: all 0.5s ease;
       }
       .left-section {
         text-align: center;
@@ -102,7 +102,6 @@
         color: #ff9800;
         text-shadow: 0 2px 8px #ff9800aa;
       }
-      /* Floating Social Icons */
       .floating-icons {
         position: fixed;
         top: 50%;
@@ -132,7 +131,6 @@
         color: #fff;
         box-shadow: 0 0 16px #007bff88;
       }
-      /* Theme Toggle */
       .theme-toggle {
         position: fixed;
         top: 24px;
@@ -158,7 +156,6 @@
         color: #fff;
         box-shadow: 0 0 16px #007bff88;
       }
-      /* Footer */
       footer {
         margin-top: 2.5rem;
         text-align: center;
@@ -167,7 +164,6 @@
         letter-spacing: 0.5px;
         text-shadow: 0 1px 4px rgba(0,0,0,0.08);
       }
-      /* Responsive */
       @media (max-width: 700px) {
         #root {
           max-width: 98vw;
@@ -192,7 +188,7 @@
           right: 6px;
         }
         #root {
-          margin-top: 0; /* Remove margin-top */
+          margin-top: 0;
           padding: 1rem 0.5rem;
         }
         .floating-img:not(.corner-image) {
@@ -203,10 +199,10 @@
           min-width: unset;
         }
         .left-section h2 {
-          font-size: 1.8rem; /* Reduce font size for smaller screens */
-          word-break: break-word; /* Allow breaking long words */
-          text-align: center; /* Center the title */
-          margin-bottom: 0.5rem; /* Reduce bottom margin */
+          font-size: 1.8rem;
+          word-break: break-word;
+          text-align: center;
+          margin-bottom: 0.5rem;
         }
       }
       #extractorCard {
@@ -225,7 +221,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        transition: all 0.5s ease; /* Add transition for smooth layout changes */
+        transition: all 0.5s ease;
       }
       #extractorCard > *:not(.extractor-images) {
         background: var(--card-bg);
@@ -357,7 +353,6 @@
         margin: 0.5rem auto 1rem auto;
         display: block;
       }
-      /* Decorative corner images */
       .corner-image {
         position: fixed;
         z-index: 900;
@@ -388,7 +383,6 @@
           height: 36px;
         }
       }
-      /* Floating animated SVG shape */
       .floating-svg {
         position: fixed;
         left: 50%;
@@ -403,7 +397,6 @@
         0% { transform: translateX(-50%) translateY(0); }
         100% { transform: translateX(-50%) translateY(40px); }
       }
-      /* Floating decorative images */
       .floating-img {
         position: fixed;
         z-index: 10;
@@ -493,7 +486,6 @@
         0% { transform: translateY(0) translateX(0); }
         100% { transform: translateY(-80px) translateX(-80px); }
       }
-      /* Add styles for history section */
       #historySection {
         max-width: 90%;
         margin: 2rem auto 0 auto;
@@ -503,7 +495,7 @@
         padding: 1.5rem;
         color: var(--primary-text);
         text-align: left;
-        display: none; /* Initially hide the history section */
+        display: none;
       }
       #historySection h3 {
         margin-top: 0;
@@ -533,7 +525,7 @@
         margin-right: 1rem;
       }
       .history-entry-info p {
-        margin: 0; /* Remove vertical margin to minimize spacing */
+        margin: 0;
         font-size: 0.9rem;
       }
       .history-entry-actions {
@@ -567,7 +559,7 @@
       }
       .left-section.collapsed-left {
         flex: unset;
-        width: 100%; /* Ensure it still takes full width in collapsed state */
+        width: 100%;
         max-width: 100%;
         height: 80px;
         overflow: hidden;
@@ -602,7 +594,7 @@
       .extractor-right-content {
         flex: 1;
         min-width: 300px;
-        padding-left: 1rem; /* Add padding for separation */
+        padding-left: 1rem;
       }
       #extractorCard > *:not(.extractor-images) {
       }
@@ -610,7 +602,6 @@
         box-sizing: border-box;
         width: 100%;
       }
-      /* Styles for Skill Domain Progress Bars */
       .domain-progress-item {
           margin-bottom: 12px;
       }
@@ -629,13 +620,12 @@
       }
       .domain-progress-bar {
           height: 100%;
-          background-color: var(--accent); /* Use accent color for the bar */
+          background-color: var(--accent);
           border-radius: 12px;
           transition: width 0.5s ease-in-out;
       }
     </style>
     <style>
-      /* Neon Glow Text */
       .neon-text {
         color: #fff;
         text-shadow:
@@ -650,25 +640,25 @@
       }
     </style>
     <style>
-      /* Top Bar Styling */
       .top-bar {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        background: var(--card-bg); /* Use card background for the top bar */
+        background: var(--card-bg);
         color: var(--primary-text);
-        padding: 0.5rem 1.5rem; /* Adjusted padding */
-        height: 60px;
+        padding: 0.5rem 1.5rem;
+        height: 80px;
         display: flex;
         align-items: center;
-        justify-content: space-between; /* Space out content */
+        justify-content: space-between;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         z-index: 1000;
         backdrop-filter: blur(8px) saturate(180%);
         -webkit-backdrop-filter: blur(8px) saturate(180%);
         border-bottom: 2px solid rgba(0, 123, 255, 0.15);
-        box-sizing: border-box; /* Include padding in the element's total width and height */
+        box-sizing: border-box;
+        flex-wrap: wrap;
       }
       .top-bar .project-info {
         display: flex;
@@ -683,67 +673,100 @@
         margin: 0;
         color: var(--accent);
       }
+      .nav-links-container {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+      }
       .top-bar .github-links {
         display: flex;
         gap: 15px;
         align-items: center;
-        /* margin-right: 20px; Removed margin, padding on parent handles spacing */
       }
-      .top-bar .github-links a {
-        color: var(--primary-text); /* Use primary text color for links */
+      .top-bar .github-links a,
+      .top-bar .top-bar-button {
+        color: var(--primary-text);
         text-decoration: none;
         font-weight: 500;
         display: flex;
         align-items: center;
         gap: 4px;
-        transition: color 0.2s;
+        transition: color 0.2s, background 0.2s;
       }
-      .top-bar .github-links a:hover {
-        color: var(--accent); /* Accent color on hover */
+      .top-bar .github-links a:hover,
+      .top-bar .top-bar-button:hover {
+        color: var(--accent);
+        background: none;
       }
       .top-bar .theme-toggle {
-          position: static; /* Remove fixed positioning */
-          /* margin-left: 10px; Removed margin, padding on parent handles spacing */
-          top: auto; /* Reset top */
-          right: auto; /* Reset right */
+          position: static;
+          margin-left: 10px;
+      }
+      #mobileNavToggle {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--primary-text);
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        margin-left: auto;
       }
       @media (max-width: 768px) {
         .top-bar {
-          flex-direction: column;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: flex-start;
           height: auto;
-          padding: 0.5rem 1rem; /* Adjusted padding */
-          gap: 10px;
-        }
-        .top-bar .github-links {
+          padding: 0.5rem 1rem;
           flex-wrap: wrap;
-          justify-content: center;
-          gap: 10px;
-           margin-right: 0; /* Remove margin on smaller screens */
+        }
+        .top-bar .project-info {
+             flex-grow: 1;
+        }
+        .nav-links-container {
+          width: 100%;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+          display: none;
+          padding-bottom: 0.5rem;
+        }
+        .nav-links-container.expanded {
+          display: flex;
+        }
+        #mobileNavToggle {
+          display: block;
         }
          body {
-            padding-top: 90px; /* Adjust padding for smaller screens */
+            padding-top: 110px;
          }
          .top-bar .theme-toggle {
-             margin-left: 0; /* Remove margin on smaller screens */
+             margin-left: 0;
+         }
+         .top-bar .github-links,
+         .top-bar .top-bar-button {
+             width: 100%;
+             justify-content: flex-start;
+             padding: 0.3rem 0;
          }
       }
       @media (max-width: 500px) {
            body {
-              padding-top: 120px; /* Adjust padding for very small screens */
+              padding-top: 140px;
            }
            .top-bar {
-               padding: 0.5rem 0.8rem; /* Further adjusted padding for very small screens */
+               padding: 0.5rem 0.8rem;
            }
            .left-section h2 {
-               font-size: 1.8rem; /* Reduce font size for smaller screens */
-               word-break: break-word; /* Allow breaking long words */
-               text-align: center; /* Center the title */
-               margin-bottom: 0.5rem; /* Reduce bottom margin */
+               font-size: 1.8rem;
+               word-break: break-word;
+               text-align: center;
+               margin-bottom: 0.5rem;
            }
         }
     </style>
     <style>
-      /* General Animations */
       .fade-in {
         animation: fadeIn 1s ease-out;
       }
@@ -767,22 +790,19 @@
         0% { transform: translateX(50px); opacity: 0; }
         100% { transform: translateX(0); opacity: 1; }
       }
-
-      /* Add more specific animations as needed */
     </style>
     <style>
-      /* Styles for external links grid and divider */
       .external-links-container {
         display: flex;
         justify-content: center;
-        gap: 20px; /* Space between the two columns */
-        flex-wrap: wrap; /* Allow wrapping on smaller screens */
-        padding: 0 1rem; /* Add horizontal padding for consistent spacing */
+        gap: 20px;
+        flex-wrap: wrap;
+        padding: 0 1rem;
       }
 
       .external-links-column {
         flex: 1;
-        min-width: 280px; /* Minimum width for each column before wrapping */
+        min-width: 280px;
         max-width: 400px;
       }
 
@@ -790,52 +810,49 @@
           list-style: none;
           padding: 0;
           text-align: left;
-          margin: 0 auto; /* Center the list within the column if the column is wider */
-          max-width: 350px; /* Set a max width to prevent lists from becoming too wide */
+          margin: 0 auto;
+          max-width: 350px;
       }
 
       .external-links-column li {
-          margin: 0.8rem 0; /* Adjust vertical spacing */
+          margin: 0.8rem 0;
       }
 
       .divider {
-        border-left: 1px solid var(--secondary-text); /* Add a vertical divider */
+        border-left: 1px solid var(--secondary-text);
       }
 
-      /* Adjust layout for split view with divider */
        #extractorCard.extractor-split .extractor-left-content {
-           border-right: 1px solid var(--secondary-text); /* Add divider in split view */
-           padding-right: 2rem; /* Increase padding to the right */
+           border-right: 1px solid var(--secondary-text);
+           padding-right: 2rem;
        }
 
        #extractorCard.extractor-split .extractor-right-content {
-           padding-left: 2rem; /* Increase padding to the left */
+           padding-left: 2rem;
        }
 
        @media (max-width: 700px) {
            .external-links-container {
-               flex-direction: column; /* Stack columns on smaller screens */
-               gap: 0; /* Remove gap when stacked */
+               flex-direction: column;
+               gap: 0;
            }
            .external-links-column {
-               min-width: unset; /* Remove min-width when stacked */
+               min-width: unset;
                max-width: 100%;
            }
            .external-links-column ul {
-               margin-bottom: 1rem; /* Add space between stacked lists */
+               margin-bottom: 1rem;
            }
            #extractorCard.extractor-split .extractor-left-content {
-                border-right: none; /* Remove vertical divider when stacked */
-                padding-right: 1rem; /* Revert padding */
+                border-right: none;
+                padding-right: 1rem;
            }
             #extractorCard.extractor-split .extractor-right-content {
-                padding-left: 1rem; /* Revert padding */
+                padding-left: 1rem;
             }
        }
-
     </style>
     <style>
-      /* Styles for new top bar buttons */
       .top-bar-button {
         background: none;
         border: none;
@@ -866,35 +883,36 @@
     </style>
   </head>
   <body>
-    <!-- Top Bar -->
     <header class="top-bar">
       <div class="project-info">
         
         <h1>Resume Skill Extractor</h1>
       </div>
-      <div class="github-links">
-        <a href="https://github.com/abhishek-si-ngh" target="_blank">
-          <i class="fab fa-github"></i> Abhishek Singh
-        </a>
-        <a href="https://github.com/Abhi110704" target="_blank">
-          <i class="fab fa-github"></i> Abhiyanshu Anand
-        </a>
-        <a href="https://github.com/Sanskar2301" target="_blank">
-          <i class="fab fa-github"></i> Sanskar Singh
-        </a>
-        <!-- New Scroll Buttons -->
-        <button class="top-bar-button" id="scrollToInfoBtn">Information</button>
-        <button class="top-bar-button" id="scrollToUploadBtn">Upload Resume</button>
+      <button id="mobileNavToggle" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+      </button>
+      <div class="nav-links-container">
+          <div class="github-links">
+            <a href="https://github.com/abhishek-si-ngh" target="_blank">
+              <i class="fab fa-github"></i> Abhishek Singh
+            </a>
+            <a href="https://github.com/Abhi110704" target="_blank">
+              <i class="fab fa-github"></i> Abhiyanshu Anand
+            </a>
+            <a href="https://github.com/Sanskar2301" target="_blank">
+              <i class="fab fa-github"></i> Sanskar Singh
+            </a>
+          </div>
+          <button class="top-bar-button" id="scrollToInfoBtn">Information</button>
+          <button class="top-bar-button" id="scrollToUploadBtn">Upload Resume</button>
       </div>
-      <!-- Theme Toggle Button (Moved here) -->
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
         <i class="fas fa-moon"></i>
       </button>
     </header>
 
-    <!-- Floating Social Icons -->
     <div class="floating-icons">
-      <!-- GitHub icons are now handled by the React app -->
+      
     </div>
     <div id="root">
       <div class="left-section fade-in">
@@ -917,14 +935,11 @@
             </ul>
           </div>
         </div>
-        <!-- Expand Button (initially hidden) -->
         <button id="expandLeftSectionBtn" style="display: none; margin-top: 1rem; padding: 0.5rem 1rem; cursor: pointer; border-radius: 20px; border: none; background-color: var(--accent); color: white; font-size: 1rem;">Expand Reading Section</button>
          
-         <!-- Scroll to History Button -->
         <button id="scrollToHistoryBtn" style="margin-top: 1rem; padding: 0.5rem 1rem; cursor: pointer; border-radius: 20px; border: none; background-color: var(--accent); color: white; font-size: 1rem; display: none;">Go to History</button>
       </div>
       <div class="right-section fade-in">
-        <!-- Resume Upload and Skill Extraction Section (with illustration) -->
         <div id="extractorCard" class="fade-in">
           <div class="extractor-left-content">
             <div class="extractor-images">
@@ -941,18 +956,13 @@
             </div>
             <div id="status"></div>
             <input type="text" id="skillSearch" placeholder="Search skill..." style="margin-bottom: 12px; width: 100%; max-width: 350px; padding: 8px; border-radius: 8px; border: 1px solid #bbb; font-size: 1rem;" oninput="filterSkills()" />
-            <!-- Skill Domain Progress Bars (Moved here) -->
             <div id="domainProgress" style="width: 100%; max-width: 400px; margin: 20px auto;"></div>
-            <!-- View History Button -->
-            <button id="showHistoryBtn" style="margin-top: 1rem; padding: 0.6rem 1.5rem; cursor: pointer; border-radius: 20px; border: none; background-color: var(--accent); color: white; font-size: 1rem; display: none;">View History</button>
           </div>
           <div class="extractor-right-content">
             <div id="skillsList"></div>
-            <!-- Clear Skills Button -->
             <button id="clearSkillsBtn" style="margin-top: 1rem; padding: 0.6rem 1.5rem; cursor: pointer; border-radius: 20px; border: none; background-color: #ff4d4d; color: white; font-size: 1rem; transition: background-color 0.2s;" >Clear Skills</button>
           </div>
         </div>
-        <!-- Extraction History Section (moved back inside right-section) -->
         <div id="historySection">
           <h3>Extraction History</h3>
           <div id="historyList"></div>
@@ -963,19 +973,15 @@
         &copy; 2025 Abhiyanshu Anand, Sanskar Singh, Abhishek Singh
       </footer>
     </div>
-    <!-- Decorative Corner Images -->
     
     
-    <!-- Floating Decorative Images -->
     <img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png" class="floating-img float-diag" alt="Floating Resume" style="top: 5%; right: 5%; animation-delay: 0s;" />
     <img src="https://cdn-icons-png.flaticon.com/512/1055/1055676.png" class="floating-img float-diag2" alt="Floating Laptop" style="top: 10%; left: 85%; animation-delay: 3s;" />
     <img src="https://cdn-icons-png.flaticon.com/512/1055/1055679.png" class="floating-img float-left-right" alt="Floating Certificate" style="bottom: 10%; left: 5%; animation-delay: 1.5s;" />
     <img src="https://cdn-icons-png.flaticon.com/512/3135/3135783.png" class="floating-img float-fast" alt="Floating Calendar" style="top: 5%; right: 10%; animation-delay: 2.2s;" />
-    <!-- Floating Skill Icons -->
     <img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" class="floating-img float-diag" alt="Floating Python Icon" style="top: 15%; left: 5%; animation-delay: 0.5s;" />
     <img src="https://cdn-icons-png.flaticon.com/512/277/277128.png" class="floating-img float-diag2" alt="Floating SQL Icon" style="top: 35%; right: 5%; animation-delay: 1.8s;" />
     <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" class="floating-img float-left-right" alt="Floating JavaScript Icon" style="bottom: 15%; left: 5%; animation-delay: 2.5s;" />
-    <!-- Additional Floating Skill Icons -->
     <img src="https://cdn-icons-png.flaticon.com/512/6132/6132222.png" class="floating-img float-fast" alt="Floating C++ Icon" style="top: 5%; right: 15%; animation-delay: 1s;" />
     <img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" class="floating-img float-diag" alt="Floating Java Icon" style="top: 60%; left: 5%; animation-delay: 3s;" />
     <img src="https://cdn-icons-png.flaticon.com/512/755/755978.png" class="floating-img float-diag2" alt="Floating React Icon" style="top: 25%; right: 15%; animation-delay: 0.2s;" />
@@ -983,7 +989,6 @@
     <img src="https://cdn-icons-png.flaticon.com/512/919/919853.png" class="floating-img float-fast" alt="Floating Docker Icon" style="bottom: 15%; right: 10%; animation-delay: 0.8s;" />
     <img src="https://cdn-icons-png.flaticon.com/512/5968/5968420.png" class="floating-img float-diag" alt="Floating AWS Icon" style="top: 10%; left: 15%; animation-delay: 2.8s;" />
     <script>
-      // Theme toggle logic
       const themeToggle = document.getElementById('themeToggle');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       function setTheme(theme) {
@@ -991,7 +996,6 @@
         localStorage.setItem('theme', theme);
         themeToggle.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
       }
-      // Initial theme
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme) {
         setTheme(savedTheme);
@@ -1003,7 +1007,6 @@
         setTheme(current === 'dark' ? 'light' : 'dark');
       });
 
-      // Resume upload and skill extraction
       let extractedSkills = [];
       async function uploadResume() {
         const fileInput = document.getElementById("resumeFile");
@@ -1039,6 +1042,7 @@
             extractedSkills = data.skills;
             const categorized = categorizeSkills(extractedSkills);
             renderSkills(categorized);
+            document.getElementById('extractorCard').classList.add('extractor-split');
           } else {
             if (!data.message) {
               skillsList.innerText = "No skills found.";
@@ -1049,26 +1053,16 @@
           status.innerText = "Failed to extract skills. Make sure your backend is running.";
         }
 
-        // Save to history
         if (extractedSkills.length > 0) {
           console.log('Attempting to save history.');
           saveHistory(fileInput.files[0].name, extractedSkills);
           console.log('History saved.');
-          // Show history section if hidden
           const historySection = document.getElementById('historySection');
           if (historySection) {
-            historySection.style.display = ''; // Show the section
+            historySection.style.display = '';
           }
-          // Scroll to the extractor card section
           document.getElementById('extractorCard').scrollIntoView({ behavior: 'smooth' });
 
-          // Show View History button after extraction if there's history
-          const showHistoryBtn = document.getElementById('showHistoryBtn');
-          if (showHistoryBtn) {
-              showHistoryBtn.style.display = 'block';
-          }
-
-          // Add event listener for Clear Skills button
           const clearSkillsBtn = document.getElementById('clearSkillsBtn');
           if (clearSkillsBtn) {
               clearSkillsBtn.addEventListener('click', clearSkills);
@@ -1076,7 +1070,6 @@
         }
       }
 
-      // Define skill categories and keywords
       const skillCategories = {
         "Programming Languages": [
           "python", "java", "javascript", "typescript", "c", "c++", "c#", "kotlin", "swift", "go", "ruby", "php", "r", "matlab", "scala", "rust"
@@ -1109,11 +1102,9 @@
         ]
       };
 
-      // Function to categorize skills
       function categorizeSkills(skills) {
         const categorized = {};
         const lowerCaseSkillCategories = {};
-        // Create a lower-case version of skillCategories for easier matching
         for (const category in skillCategories) {
             lowerCaseSkillCategories[category] = skillCategories[category].map(keyword => keyword.toLowerCase());
         }
@@ -1128,7 +1119,7 @@
               }
               categorized[category].push(skill);
               foundCategory = true;
-              break; // Assume a skill belongs to the first matching category
+              break;
             }
           }
           if (!foundCategory) {
@@ -1141,13 +1132,12 @@
         return categorized;
       }
 
-      // Modify renderSkills to handle categorized data
       function renderSkills(categorizedSkills) {
         const skillsList = document.getElementById("skillsList");
         const domainProgressDiv = document.getElementById("domainProgress");
 
         skillsList.innerHTML = "";
-        if (domainProgressDiv) domainProgressDiv.innerHTML = ""; // Clear previous progress bars
+        if (domainProgressDiv) domainProgressDiv.innerHTML = "";
 
         const categories = Object.keys(categorizedSkills);
         if (categories.length === 0 || (categories.length === 1 && categories[0] === "Other" && categorizedSkills["Other"].length === 0)) {
@@ -1155,7 +1145,6 @@
              return;
         }
 
-        // Calculate max skills in a single domain for progress bar scaling
         let maxSkillsInDomain = 0;
         for (const category of categories) {
             if (categorizedSkills[category].length > maxSkillsInDomain) {
@@ -1163,7 +1152,6 @@
             }
         }
 
-        // Render progress bars
         if (domainProgressDiv) {
             for (const category of categories) {
                 if (categorizedSkills[category].length > 0) {
@@ -1183,11 +1171,10 @@
             }
         }
 
-        // Render categorized skills list
         for (const category of categories) {
           if (categorizedSkills[category].length > 0) {
             const categoryHeading = document.createElement("h4");
-            categoryHeading.innerText = `${category} (${categorizedSkills[category].length})`; // Add count
+            categoryHeading.innerText = `${category} (${categorizedSkills[category].length})`;
             categoryHeading.style.marginTop = "1.5rem";
             categoryHeading.style.marginBottom = "0.8rem";
             categoryHeading.style.color = "var(--primary-text)";
@@ -1210,7 +1197,6 @@
 
             categorizedSkills[category].forEach(skill => {
               const chip = document.createElement("span");
-              // Add icon placeholder - replace with actual icons later if needed
               const iconHtml = getSkillIcon(skill);
               chip.innerHTML = `${iconHtml}${skill}`;
               chip.className = "skill-chip";
@@ -1221,10 +1207,8 @@
         }
       }
 
-      // Helper function to get skill icon (placeholder)
       function getSkillIcon(skill) {
           const lowerSkill = skill.toLowerCase();
-          // Basic icon mapping (expand as needed)
           if (lowerSkill.includes('python')) return '<i class="fab fa-python"></i> ';
           if (lowerSkill.includes('java')) return '<i class="fab fa-java"></i> ';
           if (lowerSkill.includes('javascript') || lowerSkill.includes('js')) return '<i class="fab fa-js"></i> ';
@@ -1237,22 +1221,20 @@
           if (lowerSkill.includes('github')) return '<i class="fab fa-github"></i> ';
           if (lowerSkill.includes('docker')) return '<i class="fab fa-docker"></i> ';
           if (lowerSkill.includes('aws')) return '<i class="fab fa-aws"></i> ';
-          // Add more mappings for other skills/domains
-          return ''; // Default empty string if no icon found
+          return '';
       }
 
       function filterSkills() {
         const skillSearch = document.getElementById("skillSearch");
         const query = skillSearch.value.trim().toLowerCase();
         if (!query) {
-          renderSkills(categorizeSkills(extractedSkills)); // Recategorize and render all if query is empty
+          renderSkills(categorizeSkills(extractedSkills));
         } else {
           const filtered = extractedSkills.filter(skill => skill.toLowerCase().includes(query));
-          renderSkills(categorizeSkills(filtered)); // Categorize and render filtered skills
+          renderSkills(categorizeSkills(filtered));
         }
       }
 
-      // Function to save history to local storage
       function saveHistory(filename, skills) {
         console.log('saveHistory called with:', {filename, skills});
         const history = JSON.parse(localStorage.getItem('extractionHistory') || '[]');
@@ -1270,11 +1252,10 @@
         } catch (e) {
             console.error('Error saving history to local storage:', e);
         }
-        renderHistory(); // Re-render history after saving
+        renderHistory();
         console.log('renderHistory called from saveHistory.');
       }
 
-      // Function to render history from local storage
       function renderHistory() {
         console.log('renderHistory called.');
         const historyListDiv = document.getElementById('historyList');
@@ -1285,12 +1266,11 @@
 
         const history = JSON.parse(localStorage.getItem('extractionHistory') || '[]');
         console.log('History read from local storage for rendering:', history);
-        historyListDiv.innerHTML = ''; // Clear current list
+        historyListDiv.innerHTML = '';
 
         if (history.length === 0) {
           historyListDiv.innerHTML = '<p>No history yet.</p>';
           console.log('History is empty, hiding history section.');
-          // Hide history section if empty
           const historySection = document.getElementById('historySection');
           if (historySection) {
             historySection.style.display = 'none';
@@ -1298,10 +1278,9 @@
           return;
         }
 
-        // Show history section if there is history data
         const historySection = document.getElementById('historySection');
         if (historySection) {
-          historySection.style.display = ''; // Show the section
+          historySection.style.display = '';
           console.log('History is not empty, showing history section.');
         }
 
@@ -1309,7 +1288,6 @@
           console.log('Rendering history entry:', entry);
           const entryElement = document.createElement('div');
           entryElement.className = 'history-entry';
-          // Basic display: filename and timestamp
           const date = new Date(entry.timestamp);
           entryElement.innerHTML = `
             <div class="history-entry-info">
@@ -1321,11 +1299,9 @@
                 <i class="fas fa-trash history-entry-delete" data-timestamp="${entry.timestamp}"></i>
             </div>
           `;
-          // Add click listener to load history
           entryElement.querySelector('.history-entry-info').addEventListener('click', () => loadFromHistory(entry.skills));
-          // Add click listener for delete button
           entryElement.querySelector('.history-entry-delete').addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent triggering the loadFromHistory click
+            e.stopPropagation();
             deleteHistoryEntry(e.target.dataset.timestamp);
           });
 
@@ -1333,44 +1309,39 @@
         });
       }
 
-      // Function to delete a history entry
       function deleteHistoryEntry(timestamp) {
         let history = JSON.parse(localStorage.getItem('extractionHistory') || '[]');
         history = history.filter(entry => entry.timestamp !== timestamp);
         localStorage.setItem('extractionHistory', JSON.stringify(history));
-        renderHistory(); // Re-render history after deletion
+        renderHistory();
       }
 
-      // Function to load skills from a history entry
       function loadFromHistory(skills) {
-        extractedSkills = skills; // Set the current extractedSkills to the historical data
+        extractedSkills = skills;
         const categorized = categorizeSkills(extractedSkills);
-        renderSkills(categorized); // Render the historical skills
+        renderSkills(categorized);
         const status = document.getElementById("status");
         if (status) status.innerText = `Loaded ${skills.length} skills from history.`;
         const skillSearch = document.getElementById("skillSearch");
-        if (skillSearch) skillSearch.value = ""; // Clear search input
+        if (skillSearch) skillSearch.value = "";
 
-        // Hide the scroll-to-extractor button and show the scroll-to-history button
         const scrollToExtractorBtn = document.getElementById('scrollToExtractorBtn');
         const scrollToHistoryBtn = document.getElementById('scrollToHistoryBtn');
          if (scrollToExtractorBtn) scrollToExtractorBtn.style.display = 'none';
          if (scrollToHistoryBtn) scrollToHistoryBtn.style.display = 'block';
       }
 
-      // Function to clear extracted skills
       function clearSkills() {
           extractedSkills = [];
           const skillsList = document.getElementById('skillsList');
           const domainProgressDiv = document.getElementById("domainProgress");
           if (skillsList) skillsList.innerHTML = '';
-          if (domainProgressDiv) domainProgressDiv.innerHTML = ''; // Clear progress bars
+          if (domainProgressDiv) domainProgressDiv.innerHTML = '';
           const status = document.getElementById('status');
           if (status) status.innerText = 'Skills cleared.';
           const skillSearch = document.getElementById('skillSearch');
           if (skillSearch) skillSearch.value = '';
 
-          // Optionally, revert the layout back to initial state
           const leftSection = document.querySelector('.left-section');
           const rightSection = document.querySelector('.right-section');
           const extractorCard = document.getElementById('extractorCard');
@@ -1380,28 +1351,17 @@
           if (rightSection) rightSection.classList.remove('expanded-right');
           if (extractorCard) extractorCard.classList.remove('extractor-split');
 
-          // Hide history section
           if (historySection) historySection.style.display = 'none';
 
-          // Show scroll-to-extractor button and hide scroll-to-history button
-          
           const scrollToHistoryBtn = document.getElementById('scrollToHistoryBtn');
             
             if (scrollToHistoryBtn) scrollToHistoryBtn.style.display = 'none';
-
-            // Hide View History button
-            const showHistoryBtn = document.getElementById('showHistoryBtn');
-            if (showHistoryBtn) {
-                 showHistoryBtn.style.display = 'none';
-                 console.log('View History button display set to none in clearSkills.');
             }
       }
 
-      // Call renderHistory on page load
       renderHistory();
       console.log('Initial renderHistory call on page load.');
 
-      // Add event listener for the expand button
       const expandButton = document.getElementById('expandLeftSectionBtn');
       if (expandButton) {
           expandButton.addEventListener('click', () => {
@@ -1409,37 +1369,20 @@
               const rightSection = document.querySelector('.right-section');
               if (leftSection) leftSection.classList.remove('collapsed-left');
               if (rightSection) rightSection.classList.remove('expanded-right');
-              // Hide the expand button when expanded
               expandButton.style.display = 'none';
-              // Remove split class from extractorCard
               const extractorCard = document.getElementById('extractorCard');
               if (extractorCard) extractorCard.classList.remove('extractor-split');
-              // Need to make the content within the left section visible again
-              // Removing the collapsed-left class should handle this due to the CSS rule
 
-               // Show the scroll-to-extractor button again
-               
-               // Hide scroll-to-history button
                const scrollToHistoryBtn = document.getElementById('scrollToHistoryBtn');
                if (scrollToHistoryBtn) {
                    scrollToHistoryBtn.style.display = 'none';
                }
+            });
+        }
 
-               // Hide View History button
-               const showHistoryBtn = document.getElementById('showHistoryBtn');
-               if (showHistoryBtn) {
-                   showHistoryBtn.style.display = 'none';
-                   console.log('View History button display set to none in expand button handler.');
-               }
-          });
-      }
-
-      // Also handle reverting the extractorCard split when the main sections are expanded back
       const leftSection = document.querySelector('.left-section');
       if (leftSection) {
           leftSection.addEventListener('transitionend', () => {
-              // This event might fire for other transitions, so we need to check
-              // A simple check is to see if the collapsed-left class is absent
               if (!leftSection.classList.contains('collapsed-left')) {
                   const extractorCard = document.getElementById('extractorCard');
                   if (extractorCard) extractorCard.classList.remove('extractor-split');
@@ -1447,7 +1390,6 @@
           });
       }
 
-       // Add event listener for scroll-to-history button
        const scrollToHistoryBtn = document.getElementById('scrollToHistoryBtn');
        if (scrollToHistoryBtn) {
            scrollToHistoryBtn.addEventListener('click', () => {
@@ -1455,7 +1397,6 @@
                console.log('History button clicked.');
                console.log('History section element:', historySection);
                console.log('History section display style:', historySection ? historySection.style.display : 'N/A');
-               // Ensure history section is visible before attempting to scroll
                if (historySection && historySection.style.display !== 'none') {
                     historySection.scrollIntoView({ behavior: 'smooth' });
                     console.log('Scrolled to history section.');
@@ -1467,7 +1408,6 @@
         renderHistory();
         console.log('Second renderHistory call at the end of the script.');
 
-       // Add event listeners for the new top bar buttons
        const scrollToInfoButton = document.getElementById('scrollToInfoBtn');
        if (scrollToInfoButton) {
            scrollToInfoButton.addEventListener('click', () => {
@@ -1486,29 +1426,32 @@
                    uploadSection.scrollIntoView({ behavior: 'smooth' });
                }
            });
-       }
+        }
+    </script>
+    <script>
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const navLinksContainer = document.querySelector('.nav-links-container');
 
-       // Add event listener for the View History button in extractorCard
-       const showHistoryButton = document.getElementById('showHistoryBtn');
-       if (showHistoryButton) {
-           showHistoryButton.addEventListener('click', () => {
-               console.log('View History button clicked.');
-               const historySection = document.getElementById('historySection');
-               if (historySection) {
-                   console.log('History section element found.', historySection);
-                   console.log('History section display style:', historySection.style.display);
-                   // Ensure history section is visible before attempting to scroll
-                   if (historySection.style.display === 'none') {
-                       historySection.style.display = ''; // Make visible if hidden
-                       console.log('History section made visible.');
-                   }
-                   historySection.scrollIntoView({ behavior: 'smooth' });
-                   console.log('Scrolled to history section.');
-               } else {
-                   console.log('History section element not found.');
-               }
-           });
-       }
+        if (mobileNavToggle && navLinksContainer) {
+            mobileNavToggle.addEventListener('click', () => {
+                navLinksContainer.classList.toggle('expanded');
+                const icon = mobileNavToggle.querySelector('i');
+                if (navLinksContainer.classList.contains('expanded')) {
+                    icon.className = 'fas fa-times';
+                } else {
+                    icon.className = 'fas fa-bars';
+                }
+            });
+
+            navLinksContainer.querySelectorAll('a, button').forEach(item => {
+                item.addEventListener('click', () => {
+                    if (navLinksContainer.classList.contains('expanded')) {
+                        navLinksContainer.classList.remove('expanded');
+                         mobileNavToggle.querySelector('i').className = 'fas fa-bars';
+                    }
+                });
+            });
+        }
     </script>
   </body>
 </html>
