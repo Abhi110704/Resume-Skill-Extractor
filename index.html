@@ -33,6 +33,31 @@
         --card-bg: #23272a;
         --secondary-text: #bbb;
         --dark-blue-accent: #1e90ff;
+
+        /* Ensure split layout styles are not overridden in dark mode */
+        #extractorCard.extractor-split {
+            flex-direction: row;
+            align-items: flex-start;
+        }
+        #extractorCard.extractor-split .extractor-left-content {
+            flex: 1;
+            padding-right: 2rem;
+            border-right: 1px solid var(--secondary-text);
+        }
+        #extractorCard.extractor-split .extractor-right-content {
+            flex: 1;
+            min-width: 300px;
+            padding-left: 2rem;
+        }
+
+        /* Remove 'box under box' appearance in dark mode split view */
+        #extractorCard.extractor-split > .extractor-left-content,
+        #extractorCard.extractor-split > .extractor-right-content {
+            background: none;
+            box-shadow: none;
+            border: none;
+            padding: 0 1rem; /* Adjust padding as needed after removing inner padding */
+        }
       }
       #root {
         max-width: 1200px;
