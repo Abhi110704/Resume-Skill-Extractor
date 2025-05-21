@@ -911,6 +911,28 @@
           }
        }
     </style>
+    <style>
+      @media (max-width: 700px) {
+        #extractorCard.extractor-split {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        #extractorCard.extractor-split .extractor-left-content {
+          border-right: none;
+          padding-right: 1rem;
+          padding-bottom: 1.5rem;
+          border-bottom: 1px solid var(--secondary-text);
+          width: 100%;
+        }
+
+        #extractorCard.extractor-split .extractor-right-content {
+          padding-left: 1rem;
+          padding-top: 1.5rem;
+          width: 100%;
+        }
+      }
+    </style>
   </head>
   <body>
     <header class="top-bar">
