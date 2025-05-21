@@ -77,29 +77,6 @@ Live API will be something like: `https://resume-api.onrender.com/extract-skills
 
 ---
 
-## 🎥 Demo Video
-
-Include a short screen recording showing: [Old Demo Video](https://drive.google.com/file/d/1JbX9f-ceMv9sBZsjVuDG487OIPR7A84k/view?usp=sharing)
-- Uploading resume
-- Extracted skills showing up
-- Integration links working
-
----
-
-## 📦 Submission Checklist
-
-- [x] Resume PDF upload working
-- [x] Skill extraction using FastAPI backend
-- [x] Visual skill tag display on frontend
-- [x] Integration buttons (mployee.me, ResumeWorded, Zety) functional
-- [x] Frontend deployed live on Netlify
-- [x] Backend deployed live on Render
-- [x] Demo video recorded and shared
-- [x] Public GitHub repository with complete code
-- [x] README.md with setup, features, deployment, and team info
-
----
-
 ## 👨‍💻 Built By
 
 - Team: TrafficMinds 
