@@ -35,20 +35,7 @@
         --dark-blue-accent: #1e90ff;
 
         /* Ensure split layout styles are not overridden in dark mode */
-        #extractorCard.extractor-split {
-            flex-direction: row;
-            align-items: flex-start;
-        }
-        #extractorCard.extractor-split .extractor-left-content {
-            flex: 1;
-            padding-right: 2rem;
-            border-right: 1px solid var(--secondary-text);
-        }
-        #extractorCard.extractor-split .extractor-right-content {
-            flex: 1;
-            min-width: 300px;
-            padding-left: 2rem;
-        }
+        /* Removed duplicate split layout styles */
 
         /* Remove 'box under box' appearance in dark mode split view */
         #extractorCard.extractor-split > .extractor-left-content,
@@ -56,8 +43,26 @@
             background: none;
             box-shadow: none;
             border: none;
-            padding: 0 1rem; /* Adjust padding as needed after removing inner padding */
+            padding: 0 1rem;
         }
+
+        /* Ensure skill chip styles are correct in dark mode */
+        .skill-chip {
+            background-color: #23272a;
+            color: #f4f4f4;
+            border: 1px solid #555;
+        }
+
+        /* Ensure progress bar container background is correct in dark mode */
+        .domain-progress-bar-container {
+            background-color: var(--secondary-bg);
+        }
+
+        /* Ensure category heading color is correct in dark mode */
+        #skillsList h4 {
+             color: var(--primary-text);
+        }
+
       }
       #root {
         max-width: 1200px;
