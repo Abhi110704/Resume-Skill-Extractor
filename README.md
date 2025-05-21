@@ -79,7 +79,7 @@ Live API will be something like: `https://resume-api.onrender.com/extract-skills
 
 ## 🎥 Demo Video
 
-Include a short screen recording showing: [Demo Video](https://drive.google.com/file/d/1JbX9f-ceMv9sBZsjVuDG487OIPR7A84k/view?usp=sharing)
+Include a short screen recording showing: [Old Demo Video](https://drive.google.com/file/d/1JbX9f-ceMv9sBZsjVuDG487OIPR7A84k/view?usp=sharing)
 - Uploading resume
 - Extracted skills showing up
 - Integration links working
