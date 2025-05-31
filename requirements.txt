@@ -4,3 +4,4 @@ python-multipart
 PyMuPDF
 requests
 pdfminer.six
+spacy
