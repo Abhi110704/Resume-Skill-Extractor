@@ -9,7 +9,7 @@ This is a full-stack Resume Skill Extractor web application built for the AKTU H
 - **Frontend**: HTML, CSS, Vanilla JS (no React needed)
 - **Backend**: Python, FastAPI, PyMuPDF for PDF parsing
 - **Deployment**:
-  - Frontend: [Netlify](https://flourishing-kangaroo-14454b.netlify.app/)
+  - Frontend & Project Link: [Netlify](https://flourishing-kangaroo-14454b.netlify.app/)
   - Backend: [Render](https://resume-backend-atll.onrender.com)
 
 ---
