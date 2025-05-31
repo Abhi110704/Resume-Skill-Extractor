@@ -30,6 +30,13 @@ This is a full-stack Resume Skill Extractor web application built for the AKTU H
 
 ## 🚀 How to Run Locally
 
+## 🔧 Setup
+
+```bash
+pip install -r requirements.txt
+python -m spacy download en_core_web_sm
+uvicorn main:app --reload
+
 ### Backend (FastAPI)
 
 ```bash
