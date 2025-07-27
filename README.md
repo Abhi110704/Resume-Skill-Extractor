@@ -84,6 +84,9 @@ Live API will be something like: `https://resume-api.onrender.com/extract-skills
 
 ---
 
+📘 **Full Tutorial**: [View Complete Step-by-Step Guide](https://code2tutorial.com/tutorial/02986497-4089-4d4e-b4b7-f86de9c0b852/index.md)
+
+
 ## 👨‍💻 Built By
 
 - Team: TrafficMinds 
